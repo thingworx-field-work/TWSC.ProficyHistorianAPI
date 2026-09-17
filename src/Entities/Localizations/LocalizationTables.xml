@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b47" majorVersion="9" minorVersion="7" revision="0" schemaVersion="1171">
+  <LocalizationTables>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="de localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.395Z" name="de" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="ru localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.410Z" name="ru" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="fr localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.442Z" name="fr" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="zh-CN localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.457Z" name="zh-CN" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="ko localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.473Z" name="ko" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="zh-TW localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.488Z" name="zh-TW" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isExtension="false" description="pt-BR localization table" documentationContent="" homeMashup="" lastModifiedDate="2026-05-20T18:07:41.579Z" name="pt-BR" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="it localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.504Z" name="it" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="Default localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:12.504Z" name="Default" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="es localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:13.037Z" name="es" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+    <LocalizationTable aspect.isCreatable="false" aspect.isEditableSystemObject="true" description="ja localization table" documentationContent="" homeMashup="" lastModifiedDate="2024-12-30T13:45:13.053Z" name="ja" tags="">
+      <avatar/>
+      <ConfigurationTables>
+        <ConfigurationTable description="Localization tokens and usage" isHidden="false" isMultiRow="true" name="LocalizationTokens" ordinal="0">
+          <DataShape>
+            <FieldDefinitions>
+              <FieldDefinition aspect.friendlyName="Translation context" baseType="STRING" description="Translation context" name="context" ordinal="3"/>
+              <FieldDefinition aspect.friendlyName="Token name" baseType="STRING" description="Token name" name="name" ordinal="0"/>
+              <FieldDefinition aspect.friendlyName="Token usage" baseType="STRING" description="Token usage" name="usage" ordinal="2"/>
+              <FieldDefinition aspect.friendlyName="Localized value" baseType="STRING" description="Localized value" name="value" ordinal="1"/>
+            </FieldDefinitions>
+          </DataShape>
+          <Rows/>
+        </ConfigurationTable>
+      </ConfigurationTables>
+    </LocalizationTable>
+  </LocalizationTables>
+</Entities>

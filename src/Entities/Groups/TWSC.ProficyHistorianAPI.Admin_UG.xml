@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <Groups>
+        <Group
+         description=""
+         documentationContent=""
+         homeMashup=""
+         name="TWSC.ProficyHistorianAPI.Admin_UG"
+         projectName="TWSC.ProficyHistorianAPI"
+         scimDisplayName=""
+         scimExternalId=""
+         scimId=""
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR:TWSC.ProficyHistorianAPI.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <Members>
+                <Members></Members>
+            </Members>
+        </Group>
+    </Groups>
+</Entities>

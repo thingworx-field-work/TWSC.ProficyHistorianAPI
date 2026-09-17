@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <ThingShapes>
+        <ThingShape
+         aspect.isSystemObject="false"
+         className=""
+         description="Flexible connectivity to a Proficy Historian server's REST API"
+         documentationContent=""
+         homeMashup=""
+         name="TWSC.ProficyHistorianAPI.Management_TS"
+         projectName="TWSC.ProficyHistorianAPI"
+         tags="">
+            <PropertyDefinitions>
+                <PropertyDefinition
+                 aspect.dataChangeType="VALUE"
+                 aspect.isIndexed="false"
+                 aspect.isPersistent="false"
+                 baseType="STRING"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="oauthAccessToken"
+                 ordinal="2"></PropertyDefinition>
+                <PropertyDefinition
+                 aspect.dataChangeType="VALUE"
+                 baseType="DATETIME"
+                 category=""
+                 description=""
+                 isLocalOnly="false"
+                 name="oauthExpiresAt"
+                 ordinal="3"></PropertyDefinition>
+            </PropertyDefinitions>
+            <ServiceDefinitions>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="CreateInfotableFromJSON">
+                    <ResultType
+                     baseType="NOTHING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="JSON"
+                         description=""
+                         name="jsonInput"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="API"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="ExecuteRequest">
+                    <ResultType
+                     baseType="STRING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter1"
+                         ordinal="1"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter2"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter3"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter4"
+                         ordinal="4"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter5"
+                         ordinal="5"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="Parameter6"
+                         ordinal="6"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="RequestBody"
+                         ordinal="8"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="RequestDisplayName"
+                         ordinal="7"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Tags"
+                 description="Returns properties that can be charted for an entity (in form of entityName&gt;TagName)"
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianEntities">
+                    <ResultType
+                     aspect.dataShape="EntityList"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions></ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Tags"
+                 description="Returns properties that can be charted for an entity (in form of entityName&gt;TagName)"
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianEntityTags">
+                    <ResultType
+                     aspect.dataShape="GenericStringList"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="entityName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Tags"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianTagMax">
+                    <ResultType
+                     baseType="NUMBER"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="propertyName"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="thingName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Tags"
+                 description=""
+                 isAllowOverride="false"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianTagMin">
+                    <ResultType
+                     baseType="NUMBER"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="propertyName"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="thingName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="API"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetOAuthToken">
+                    <ResultType
+                     baseType="STRING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions></ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="API"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetParametersFromRequest">
+                    <ResultType
+                     aspect.dataShape="TWSC.ProficyHistorianAPI.RequestParameters_DS"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="RequestSpecification"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="API"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetRequestSpecification">
+                    <ResultType
+                     aspect.dataShape="TWSC.ProficyHistorianAPI.RequestConfiguration_DS"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="RequestDisplayName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="API"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetRequestSpecificationWithParameters">
+                    <ResultType
+                     baseType="STRING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue1"
+                         ordinal="1"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue2"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue3"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue4"
+                         ordinal="4"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue5"
+                         ordinal="5"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="ParameterValue6"
+                         ordinal="6"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="RequestSpecification"
+                         ordinal="7"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Data"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="QueryHistorianMultipleTags">
+                    <ResultType
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="DATETIME"
+                         description=""
+                         name="endDate"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.defaultValue="5000"
+                         baseType="STRING"
+                         description=""
+                         name="maxItems"
+                         ordinal="5"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.dataShape="PropertyList"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="propertyNames"
+                         ordinal="5"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="DATETIME"
+                         description=""
+                         name="startDate"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="thingName"
+                         ordinal="4"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Data"
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="QueryHistorianSingleTag">
+                    <ResultType
+                     aspect.dataShape="NumberValueStream"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="DATETIME"
+                         description=""
+                         name="endDate"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.defaultValue="5000"
+                         baseType="STRING"
+                         description=""
+                         name="maxItems"
+                         ordinal="5"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="propertyName"
+                         ordinal="1"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="DATETIME"
+                         description=""
+                         name="startDate"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         baseType="STRING"
+                         description=""
+                         name="thingName"
+                         ordinal="4"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+            </ServiceDefinitions>
+            <EventDefinitions></EventDefinitions>
+            <ServiceMappings></ServiceMappings>
+            <ServiceImplementations>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="CreateInfotableFromJSON">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = Resources["InfoTableFunctions"].CreateInfoTable();
+                                    try {
+                                        if (jsonInput && jsonInput.array) {
+                                            for (let i = 0; i < jsonInput.array.length; i++) {
+                                                //Get object
+                                                let json = jsonInput.array[i];
+                                                //Adding fields for all attributes
+                                                let keys = Object.keys(json);
+                                                for (let i = 0; i < keys.length; i++) {
+                                                    result.AddField({
+                                                        name: keys[i],
+                                                        baseType: 'STRING'
+                                                    });
+                                                }
+                                                //Adding object
+                                                result.AddRow(json);
+                                            }
+                                        }
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="ExecuteRequest">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try {
+                                    	let requestSpec = me.GetRequestSpecification({
+                                    		RequestDisplayName: RequestDisplayName /* STRING */
+                                    	});
+                                    
+                                    	// fyi date time parameters need to be passed in as YYYY-MM-DDTHH:mm:ss.SSSZ
+                                    	// tag names are delimited by ;
+                                    	let requestWithParameters = me.GetRequestSpecificationWithParameters({
+                                    		ParameterValue1: encodeURIComponent(Parameter1) /* STRING */ ,
+                                    		ParameterValue2: encodeURIComponent(Parameter2) /* STRING */ ,
+                                    		ParameterValue3: encodeURIComponent(Parameter3) /* STRING */ ,
+                                    		ParameterValue4: encodeURIComponent(Parameter4) /* STRING */ ,
+                                    		ParameterValue5: encodeURIComponent(Parameter5) /* STRING */ ,
+                                    		ParameterValue6: encodeURIComponent(Parameter6) /* STRING */ ,
+                                    		RequestSpecification: requestSpec.RequestSpecification /* STRING */
+                                    	});
+                                    
+                                    	const configuration = me.GetConfigurationTable({
+                                    		tableName: "ServerConfiguration"
+                                    	});
+                                    	if (!configuration.ServerURL || !configuration.Username || !configuration.Password) {
+                                    		throw "ServerConfiguration must contain ServerURL, Username, and Password";
+                                    	}
+                                    	let body;
+                                    	if (RequestBody) {
+                                    		body = JSON.parse(RequestBody);
+                                    	}
+                                    	if (requestWithParameters && configuration) {
+                                    		const serverURL = configuration.ServerURL;
+                                    		const username = configuration.Username;
+                                    		const password = configuration.Password;
+                                    		const url = serverURL + requestWithParameters;
+                                    		//logger.error("{} - ExecuteRequest URL is {}", me.name, url);
+                                    
+                                    		const token = me.GetOAuthToken();
+                                    
+                                    		const headers = {
+                                    			"Authorization": "Bearer " + token,
+                                    			"Accept": "application/json"
+                                    		};
+                                    
+                                    		const params = {
+                                    			headers: headers /* JSON */ ,
+                                    			ignoreSSLErrors: true,
+                                    			url: url,
+                                    			content: body, /* JSON */
+                                    			password: password,
+                                    			username: username
+                                    		};
+                                    
+                                    		let content;
+                                    		if (requestSpec.RequestType === "GET") {
+                                    			content = Resources["ContentLoaderFunctions"].GetJSON(params);
+                                    		} else if (requestSpec.RequestType === "PUT") {
+                                    			content = Resources["ContentLoaderFunctions"].PutJSON(params);
+                                    		} else if (requestSpec.RequestType === "POST") {
+                                    			content = Resources["ContentLoaderFunctions"].PostJSON(params);
+                                    		} else {
+                                    			throw "Request type " + requestSpec.RequestType + " is not supported, ignoring request";
+                                    		}
+                                    
+                                    		if (content.error) {
+                                    			logger.error("{} - ExecuteRequest content.error: {}", me.name, content.error);
+                                    		}
+                                    
+                                    		if (content) {
+                                    			result = content;
+                                    		}
+                                    	}
+                                    
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianEntities">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    // Returns the properties that can be charted for a given entity
+                                    let result = DataShapes["EntityList"].CreateValues();
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: 10000 /* STRING */ ,
+                                    		Parameter1: "*" + THING_DELIMITER + "*",
+                                    		Parameter4: undefined /* STRING */ ,
+                                    		Parameter3: undefined /* STRING */ ,
+                                    		Parameter6: undefined /* STRING */ ,
+                                    		RequestDisplayName: "Get tags with name mask",
+                                    		Parameter5: undefined /* STRING */ ,
+                                    		RequestBody: undefined
+                                    	});
+                                        tagsJSON = JSON.parse(tagsJSON);
+                                        
+                                    	let seenEntities = {};
+                                    	tagsJSON.Tags.forEach(tag => {
+                                    		const [entityName, property] = tag.split(THING_DELIMITER);
+                                    
+                                    		if (entityName && !seenEntities[entityName]) {
+                                    			seenEntities[entityName] = true;
+                                    
+                                    			result.AddRow({
+                                    				name: entityName
+                                    			});
+                                    		}
+                                    	});
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianEntityTags">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    // Returns the properties that can be charted for a given entity
+                                    let result = DataShapes["GenericStringList"].CreateValues();
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: 10000 /* STRING */ ,
+                                    		Parameter1: entityName + THING_DELIMITER + "*", // use > delimitoeryr
+                                    		Parameter4: undefined /* STRING */ ,
+                                    		Parameter3: undefined /* STRING */ ,
+                                    		Parameter6: undefined /* STRING */ ,
+                                    		RequestDisplayName: "Get tags with name mask",
+                                    		Parameter5: undefined /* STRING */ ,
+                                    		RequestBody: undefined
+                                    	});
+                                    	let obj = Object();
+                                        tagsJSON = JSON.parse(tagsJSON);
+                                    	tagsJSON.Tags.forEach(item => {
+                                    		const [thingName, property] = item.split(">");
+                                    		if (entityName == thingName && property.length > 0) {
+                                    			obj.item = property;
+                                    			result.AddRow(obj);
+                                    		}
+                                    	});
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianTagMax">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = 0;
+                                    
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                    	let tagName = thingName + THING_DELIMITER + propertyName;
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: undefined,
+                                    		Parameter1: tagName,
+                                    		Parameter4: undefined,
+                                    		Parameter3: undefined,
+                                    		Parameter6: undefined,
+                                    		RequestDisplayName: "Get tag properties",
+                                    		Parameter5: undefined,
+                                    		RequestBody: undefined
+                                    	});
+                                    	if (tagsJSON.HiEngineeringUnits) {
+                                    		result = tagsJSON.HiEngineeringUnits;
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianTagMin">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = 0;
+                                    
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                    	let tagName = thingName + THING_DELIMITER + propertyName;
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: undefined,
+                                    		Parameter1: tagName,
+                                    		Parameter4: undefined,
+                                    		Parameter3: undefined,
+                                    		Parameter6: undefined,
+                                    		RequestDisplayName: "Get tag properties",
+                                    		Parameter5: undefined,
+                                    		RequestBody: undefined
+                                    	});
+                                    	if (tagsJSON.HiEngineeringUnits) {
+                                    		result = tagsJSON.LoEngineeringUnits;
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetOAuthToken">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try {
+                                    	const ACCESS_TOKEN = me.oauthAccessToken;
+                                    	const EXPIRES_AT = me.oauthExpiresAt;
+                                    	const NOW = new Date();
+                                    
+                                    	// Add a safety buffer (ex: 30 seconds)
+                                    	const BUFFER_MS = 30000;
+                                    
+                                    	// Check if token is still valid
+                                    	if (ACCESS_TOKEN && EXPIRES_AT && (NOW.getTime() < (EXPIRES_AT.getTime() - BUFFER_MS))) {
+                                    		result = ACCESS_TOKEN;
+                                    	} else {
+                                    		const configuration = me.GetConfigurationTable({
+                                    			tableName: "ServerConfiguration"
+                                    		});
+                                    		if (!configuration.TokenURL || !configuration.Username || !configuration.Password) {
+                                    			throw "ServerConfiguration must contain TokenURL, Username, and Password";
+                                    		}
+                                    
+                                    		// Request new token
+                                    		const body = "grant_type=password" +
+                                    			"&username=" + encodeURIComponent(configuration.Username) +
+                                    			"&password=" + encodeURIComponent(configuration.Password);
+                                    
+                                    		const headers = {
+                                    			"Content-Type": "application/x-www-form-urlencoded",
+                                    			"Authorization": "Basic " + base64EncodeString("historian_public_rest_api:publicapisecret"),
+                                    			"Accept": "application/json"
+                                    		};
+                                    
+                                    		const responseRaw = Resources["ContentLoaderFunctions"].PostText({
+                                    			url: configuration.TokenURL,
+                                    			method: "POST",
+                                    			headers: headers,
+                                    			content: body,
+                                    			ignoreSSLErrors: true
+                                    		});
+                                    
+                                    		const parsed = JSON.parse(responseRaw.substring(0, responseRaw.indexOf("}") + 1));
+                                    
+                                    		if (!parsed || !parsed.access_token) {
+                                    			throw "Failed to retrieve token. responseRaw = " + responseRaw;
+                                    		}
+                                    
+                                    		// Store new token + expiration
+                                    		me.oauthAccessToken = parsed.access_token;
+                                    		result = me.oauthAccessToken;
+                                    
+                                    		// expires_in is seconds → convert to ms
+                                    		const expiresInMs = (parsed.expires_in || 3600) * 1000;
+                                    		me.oauthExpiresAt = new Date(NOW.getTime() + expiresInMs);
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetParametersFromRequest">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = DataShapes["TWSC.ProficyHistorianAPI.RequestParameters_DS"].CreateValues();
+                                    try {
+                                    	let valueArray = RequestSpecification.match(/\{(.*?)\}/g);
+                                    	let newEntry = {};
+                                    	if (valueArray) {
+                                    		for (x = 0; x < valueArray.length; x++) {
+                                    			let value = valueArray[x];
+                                    			value = value.replace(/[{}]/g, "");
+                                    			let parameterNameField = "Parameter" + (parseInt(x) + 1) + "Name";
+                                    			newEntry[parameterNameField] = value;
+                                    		}
+                                    		result.AddRow(newEntry);
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetRequestSpecification">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = DataShapes["TWSC.ProficyHistorianAPI.RequestConfiguration_DS"].CreateValues();
+                                    try {
+                                    	const data = me.GetConfigurationTable({
+                                    		tableName: "RequestConfiguration" /* STRING */
+                                    	});
+                                    	let query;
+                                    	if (RequestDisplayName) {
+                                    		query = {
+                                    			filters: {
+                                    				type: "EQ",
+                                    				fieldName: "RequestDisplayName",
+                                    				value: RequestDisplayName
+                                    			}
+                                    		};
+                                    	}
+                                    	result = Resources["InfoTableFunctions"].Query({
+                                    		t: data,
+                                    		query: query
+                                    	});
+                                    
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetRequestSpecificationWithParameters">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = "";
+                                    try {
+                                    	let valueArray = RequestSpecification.match(/\{(.*?)\}/g);
+                                        if (valueArray) {
+                                            for (x = 0; x < valueArray.length; x++) {
+                                                let value = valueArray[x];
+                                                if (x === 0 && ParameterValue1) {
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue1);
+                                                } else if (x === 1 && ParameterValue2){
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue2);
+                                                } else if (x === 2 && ParameterValue3){
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue3);
+                                                } else if (x === 3 && ParameterValue4){
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue4);
+                                                } else if (x === 4 && ParameterValue5){
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue5);
+                                                } else if (x === 5 && ParameterValue6){
+                                                    RequestSpecification = RequestSpecification.replace(value, ParameterValue6);
+                                                }
+                                            }
+                                        }
+                                        result = RequestSpecification;
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="QueryHistorianMultipleTags">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                    	// Create an empty Infotable
+                                    	var params = {
+                                    		infoTableName: "DynamicInfoTable" // Optional: Assign a name to the infotable
+                                    	};
+                                    	var result = Resources["InfoTableFunctions"].CreateInfoTable(params);
+                                    	// Add the timestamp
+                                    	let newField = new Object();
+                                    	newField.name = "timestamp";
+                                    	newField.baseType = "DATETIME";
+                                    	result.AddField(newField);
+                                    
+                                    	// Add the other fields
+                                    	let tagList = "";
+                                    	propertyNames.rows.toArray().forEach(row => {
+                                    		let propertyName = row.name;
+                                    		newField = new Object();
+                                    		newField.name = propertyName;
+                                    		newField.baseType = "NUMBER";
+                                    		result.AddField(newField);
+                                    		tagList += thingName + THING_DELIMITER + propertyName + ";";
+                                    	});
+                                    	tagList = tagList.slice(0, -1); // remove last semicolon
+                                    
+                                    	let minimum = Math.min(5000, maxItems).toString();
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: startDate.toISOString(),
+                                    		Parameter1: tagList,
+                                    		Parameter4: minimum,
+                                    		Parameter3: endDate.toISOString(),
+                                    		Parameter6: undefined,
+                                    		RequestDisplayName: "Get raw data",
+                                    		Parameter5: "1",
+                                    		RequestBody: undefined
+                                    	});
+                                        tagsJSON = JSON.parse(tagsJSON);
+                                    	// logger.error(tagList +" "+ startDate.toISOString()+" "+ endDate.toISOString()+" "+minumum);
+                                    	// logger.error(JSON.stringify(tagsJSON));	
+                                    	tagsJSON.Data.forEach(data => {
+                                    		let propertyName = data.TagName.split('>')[1].trim();
+                                    		const dataItem = data;
+                                    		dataItem.Samples.forEach(sample => {
+                                    			let dt = parseDateISO(sample.TimeStamp);
+                                    			if (dt >= startDate && dt <= endDate) {
+                                    				var newRow = {};
+                                    				newRow.timestamp = parseDateISO(sample.TimeStamp);
+                                    				newRow[propertyName] = sample.Value;
+                                    				result.AddRow(newRow);
+                                    			}
+                                    		});
+                                    	});
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="QueryHistorianSingleTag">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = DataShapes["NumberValueStream"].CreateValues();
+                                    const THING_DELIMITER = ">";
+                                    try {
+                                        let minimum = Math.min(5000, maxItems).toString();
+                                        let tagName = thingName + THING_DELIMITER + propertyName;
+                                    	let tagsJSON = me.ExecuteRequest({
+                                    		Parameter2: startDate.toISOString(),
+                                    		Parameter1: tagName,
+                                            Parameter4: minimum,
+                                    		Parameter3: endDate.toISOString(),
+                                    		Parameter6: undefined,
+                                    		RequestDisplayName: "Get raw data",
+                                    		Parameter5: "1",
+                                    		RequestBody: undefined
+                                    	});
+                                        // logger.error(tagName +" "+ startDate.toISOString()+" "+ endDate.toISOString()+" "+minumum);
+                                    	// logger.error(JSON.stringify(tagsJSON));
+                                    	let obj = Object();
+                                        tagsJSON = JSON.parse(tagsJSON);
+                                    	const dataItem = tagsJSON.Data[0];
+                                    	dataItem.Samples.forEach(sample => {
+                                    		let dt = parseDateISO(sample.TimeStamp);
+                                    		if (dt >= startDate && dt <= endDate) {
+                                    			result.AddRow({
+                                    				value: sample.Value, // NUMBER
+                                    				timestamp: parseDateISO(sample.TimeStamp) //DATETIME
+                                    			});
+                                    		}
+                                    	});
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+            </ServiceImplementations>
+            <Subscriptions></Subscriptions>
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR:TWSC.ProficyHistorianAPI.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions>
+                <ConfigurationTableDefinition
+                 category=""
+                 dataShapeName="TWSC.ProficyHistorianAPI.RequestConfiguration_DS"
+                 description=""
+                 isHidden="false"
+                 isMultiRow="true"
+                 name="RequestConfiguration"
+                 ordinal="0"
+                 source="IMPORT"></ConfigurationTableDefinition>
+                <ConfigurationTableDefinition
+                 category=""
+                 dataShapeName="TWSC.ProficyHistorianAPI.ServerConfiguration_DS"
+                 description=""
+                 isHidden="false"
+                 isMultiRow="false"
+                 name="ServerConfiguration"
+                 ordinal="0"
+                 source="IMPORT"></ConfigurationTableDefinition>
+            </ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description=""
+                 isMultiRow="true"
+                 name="RequestConfiguration"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="STRING"
+                             description=""
+                             name="Category"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="STRING"
+                             description=""
+                             name="RequestDisplayName"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="true"
+                             baseType="STRING"
+                             description=""
+                             name="RequestSpecification"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="true"
+                             baseType="STRING"
+                             description="API Request Type (POST, GET, PUT, DELETE)"
+                             name="RequestType"
+                             ordinal="2"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows></Rows>
+                </ConfigurationTable>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description=""
+                 isMultiRow="false"
+                 name="ServerConfiguration"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="PASSWORD"
+                             description="Password used to make API Requests"
+                             name="Password"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="true"
+                             baseType="STRING"
+                             description="URL to use to make API requests"
+                             name="ServerURL"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="STRING"
+                             description=""
+                             name="TokenURL"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="STRING"
+                             description="User name used to make API Requests"
+                             name="Username"
+                             ordinal="3"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <Password></Password>
+                            <ServerURL></ServerURL>
+                            <TokenURL></TokenURL>
+                            <Username></Username>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations>
+                <AlertDefinitions
+                 name="oauthAccessToken"></AlertDefinitions>
+                <AlertDefinitions
+                 name="oauthExpiresAt"></AlertDefinitions>
+            </AlertConfigurations>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+        </ThingShape>
+    </ThingShapes>
+</Entities>

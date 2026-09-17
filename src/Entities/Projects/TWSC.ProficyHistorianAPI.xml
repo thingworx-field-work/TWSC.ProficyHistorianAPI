@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <Projects>
+        <Project
+         artifactId=""
+         aspect.projectType="Component"
+         dependsOn="{&quot;extensions&quot;:&quot;PTC.Base:9.7.0&quot;,&quot;projects&quot;:&quot;PTC.Base:0.0.0&quot;}"
+         description=""
+         documentationContent=""
+         groupId=""
+         homeMashup=""
+         minPlatformVersion=""
+         name="TWSC.ProficyHistorianAPI"
+         packageVersion="1.0.0"
+         projectName="TWSC.ProficyHistorianAPI"
+         publishResult=""
+         state="DRAFT"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR:TWSC.ProficyHistorianAPI.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+        </Project>
+    </Projects>
+</Entities>
