@@ -6,7 +6,7 @@
     <DataShapes>
         <DataShape
          baseDataShape=""
-         description="Proficy Historian REST API"
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          homeMashup=""
          name="TWSC.ProficyHistorianAPI.RequestConfiguration_DS"
@@ -22,7 +22,16 @@
             </DesignTimePermissions>
             <RunTimePermissions></RunTimePermissions>
             <VisibilityPermissions>
-                <Visibility></Visibility>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianAPI.Default_OR:TWSC.ProficyHistorianAPI.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
             </VisibilityPermissions>
             <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
             <ConfigurationTables></ConfigurationTables>

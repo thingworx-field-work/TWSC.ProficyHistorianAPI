@@ -7,7 +7,7 @@
         <ThingTemplate
          aspect.isSystemObject="false"
          baseThingTemplate="PTC.Base.CommonManager_TT"
-         description="Flexible connectivity to a Proficy Historian server's REST API"
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          effectiveThingPackage="ConfiguredThing"
          homeMashup=""

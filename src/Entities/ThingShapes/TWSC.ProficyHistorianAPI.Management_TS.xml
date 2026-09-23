@@ -7,7 +7,7 @@
         <ThingShape
          aspect.isSystemObject="false"
          className=""
-         description="Flexible connectivity to a Proficy Historian server's REST API"
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          homeMashup=""
          name="TWSC.ProficyHistorianAPI.Management_TS"
@@ -36,28 +36,6 @@
             <ServiceDefinitions>
                 <ServiceDefinition
                  aspect.isAsync="false"
-                 category=""
-                 description=""
-                 isAllowOverride="true"
-                 isLocalOnly="false"
-                 isOpen="false"
-                 isPrivate="false"
-                 name="CreateInfotableFromJSON">
-                    <ResultType
-                     baseType="NOTHING"
-                     description=""
-                     name="result"
-                     ordinal="0"></ResultType>
-                    <ParameterDefinitions>
-                        <FieldDefinition
-                         baseType="JSON"
-                         description=""
-                         name="jsonInput"
-                         ordinal="1"></FieldDefinition>
-                    </ParameterDefinitions>
-                </ServiceDefinition>
-                <ServiceDefinition
-                 aspect.isAsync="false"
                  category="API"
                  description=""
                  isAllowOverride="true"
@@ -66,7 +44,7 @@
                  isPrivate="false"
                  name="ExecuteRequest">
                     <ResultType
-                     baseType="STRING"
+                     baseType="JSON"
                      description=""
                      name="result"
                      ordinal="0"></ResultType>
@@ -426,59 +404,6 @@
                 <ServiceImplementation
                  description=""
                  handlerName="Script"
-                 name="CreateInfotableFromJSON">
-                    <ConfigurationTables>
-                        <ConfigurationTable
-                         dataShapeName=""
-                         description=""
-                         isMultiRow="false"
-                         name="Script"
-                         ordinal="0">
-                            <DataShape>
-                                <FieldDefinitions>
-                                    <FieldDefinition
-                                     baseType="STRING"
-                                     description="code"
-                                     name="code"
-                                     ordinal="0"></FieldDefinition>
-                                </FieldDefinitions>
-                            </DataShape>
-                            <Rows>
-                                <Row>
-                                    <code>
-                                    <![CDATA[
-                                    let result = Resources["InfoTableFunctions"].CreateInfoTable();
-                                    try {
-                                        if (jsonInput && jsonInput.array) {
-                                            for (let i = 0; i < jsonInput.array.length; i++) {
-                                                //Get object
-                                                let json = jsonInput.array[i];
-                                                //Adding fields for all attributes
-                                                let keys = Object.keys(json);
-                                                for (let i = 0; i < keys.length; i++) {
-                                                    result.AddField({
-                                                        name: keys[i],
-                                                        baseType: 'STRING'
-                                                    });
-                                                }
-                                                //Adding object
-                                                result.AddRow(json);
-                                            }
-                                        }
-                                    } catch (err) {
-                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
-                                    	throw ("An error has occurred. Please check the script logs for more details.");
-                                    }
-                                    ]]>
-                                    </code>
-                                </Row>
-                            </Rows>
-                        </ConfigurationTable>
-                    </ConfigurationTables>
-                </ServiceImplementation>
-                <ServiceImplementation
-                 description=""
-                 handlerName="Script"
                  name="ExecuteRequest">
                     <ConfigurationTables>
                         <ConfigurationTable
@@ -566,7 +491,7 @@
                                     		}
                                     
                                     		if (content) {
-                                    			result = content;
+                                                result = content;
                                     		}
                                     	}
                                     
@@ -619,7 +544,6 @@
                                     		Parameter5: undefined /* STRING */ ,
                                     		RequestBody: undefined
                                     	});
-                                        tagsJSON = JSON.parse(tagsJSON);
                                         
                                     	let seenEntities = {};
                                     	tagsJSON.Tags.forEach(tag => {
@@ -682,13 +606,11 @@
                                     		Parameter5: undefined /* STRING */ ,
                                     		RequestBody: undefined
                                     	});
-                                    	let obj = Object();
-                                        tagsJSON = JSON.parse(tagsJSON);
+                                    
                                     	tagsJSON.Tags.forEach(item => {
                                     		const [thingName, property] = item.split(">");
                                     		if (entityName == thingName && property.length > 0) {
-                                    			obj.item = property;
-                                    			result.AddRow(obj);
+                                    			result.AddRow({item: property});
                                     		}
                                     	});
                                     } catch (err) {
@@ -1087,19 +1009,13 @@
                                     	};
                                     	var result = Resources["InfoTableFunctions"].CreateInfoTable(params);
                                     	// Add the timestamp
-                                    	let newField = new Object();
-                                    	newField.name = "timestamp";
-                                    	newField.baseType = "DATETIME";
-                                    	result.AddField(newField);
+                                    	result.AddField({name: "timestamp", baseType: "DATETIME"});
                                     
                                     	// Add the other fields
                                     	let tagList = "";
                                     	propertyNames.rows.toArray().forEach(row => {
                                     		let propertyName = row.name;
-                                    		newField = new Object();
-                                    		newField.name = propertyName;
-                                    		newField.baseType = "NUMBER";
-                                    		result.AddField(newField);
+                                    		result.AddField({name: propertyName, baseType: "NUMBER"});
                                     		tagList += thingName + THING_DELIMITER + propertyName + ";";
                                     	});
                                     	tagList = tagList.slice(0, -1); // remove last semicolon
@@ -1183,8 +1099,8 @@
                                     	});
                                         // logger.error(tagName +" "+ startDate.toISOString()+" "+ endDate.toISOString()+" "+minumum);
                                     	// logger.error(JSON.stringify(tagsJSON));
-                                    	let obj = Object();
-                                        tagsJSON = JSON.parse(tagsJSON);
+                                    
+                                        //tagsJSON = JSON.parse(tagsJSON);
                                     	const dataItem = tagsJSON.Data[0];
                                     	dataItem.Samples.forEach(sample => {
                                     		let dt = parseDateISO(sample.TimeStamp);
@@ -1340,7 +1256,138 @@
                 <AlertDefinitions
                  name="oauthExpiresAt"></AlertDefinitions>
             </AlertConfigurations>
-            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+            <InstanceRunTimePermissions>
+                <Permissions
+                 resourceName="GetRequestSpecificationWithParameters">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetParametersFromRequest">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetHistorianEntityTags">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetRequestSpecification">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="QueryHistorianSingleTag">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="QueryHistorianMultipleTags">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetOAuthToken">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetHistorianTagMin">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetHistorianTagMax">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+                <Permissions
+                 resourceName="GetHistorianEntities">
+                    <PropertyRead></PropertyRead>
+                    <PropertyWrite></PropertyWrite>
+                    <ServiceInvoke>
+                        <Principal
+                         isPermitted="true"
+                         name="TWSC.ProficyHistorianAPI.Default_UG"
+                         type="Group"></Principal>
+                    </ServiceInvoke>
+                    <EventInvoke></EventInvoke>
+                    <EventSubscribe></EventSubscribe>
+                </Permissions>
+            </InstanceRunTimePermissions>
         </ThingShape>
     </ThingShapes>
 </Entities>

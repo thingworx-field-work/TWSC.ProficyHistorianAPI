@@ -5,7 +5,7 @@
  universal="password">
     <Groups>
         <Group
-         description=""
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          homeMashup=""
          name="TWSC.ProficyHistorianAPI.Admin_UG"

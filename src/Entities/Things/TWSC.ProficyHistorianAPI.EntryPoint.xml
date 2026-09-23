@@ -6,7 +6,7 @@
     <Things>
         <Thing
          aspect.isSystemObject="false"
-         description="Flexible connectivity to a Proficy Historian server's REST API"
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          effectiveThingPackage="ConfiguredThing"
          enabled="true"
@@ -111,7 +111,7 @@
                     Not Configured
                     ]]>
                     </Value>
-                    <Timestamp>2026-09-17T22:00:48.170Z</Timestamp>
+                    <Timestamp>2026-09-23T21:38:55.731Z</Timestamp>
                     <Quality>GOOD</Quality>
                 </componentDeploymentState>
                 <componentDefaultOrg>
@@ -133,13 +133,13 @@
                                      baseType="STRING"
                                      description="Common name of the component"
                                      name="ComponentName"
-                                     ordinal="1"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Component's project name"
                                      name="ComponentProjectName"
-                                     ordinal="2"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                 </FieldDefinitions>
                             </DataShape>
                             <Rows></Rows>
@@ -159,31 +159,31 @@
                                      baseType="JSON"
                                      description="Information about the internal status."
                                      name="additionalInfo"
-                                     ordinal="5"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Current version of the component"
                                      name="currentVersion"
-                                     ordinal="4"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Name of the Component"
                                      name="name"
-                                     ordinal="1"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="config status of the component"
                                      name="status"
-                                     ordinal="3"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Type of action."
                                      name="type"
-                                     ordinal="2"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                 </FieldDefinitions>
                             </DataShape>
                             <Rows></Rows>
@@ -195,7 +195,7 @@
                 <componentDescription>
                     <Value>
                     <![CDATA[
-                    Flexible connectivity to a Proficy Historian server's REST API
+                    Configurable Proficy Historian REST API integration
                     ]]>
                     </Value>
                     <Timestamp>2026-09-17T21:58:05.190Z</Timestamp>
@@ -212,31 +212,31 @@
                                      baseType="JSON"
                                      description="Information about the internal status."
                                      name="additionalInfo"
-                                     ordinal="5"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Current version of the component"
                                      name="currentVersion"
-                                     ordinal="4"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Name of the Component"
                                      name="name"
-                                     ordinal="1"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="config status of the component"
                                      name="status"
-                                     ordinal="3"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Type of action."
                                      name="type"
-                                     ordinal="2"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                 </FieldDefinitions>
                             </DataShape>
                             <Rows></Rows>
@@ -262,10 +262,10 @@
                 <componentVersion>
                     <Value>
                     <![CDATA[
-                    1.0.0
+                    0.1.0
                     ]]>
                     </Value>
-                    <Timestamp>2026-09-17T18:56:06.403Z</Timestamp>
+                    <Timestamp>2026-09-23T21:36:06.148Z</Timestamp>
                     <Quality>GOOD</Quality>
                 </componentVersion>
                 <componentMainMashup>
@@ -293,31 +293,31 @@
                                      baseType="JSON"
                                      description="Information about the internal status."
                                      name="additionalInfo"
-                                     ordinal="5"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Current version of the component"
                                      name="currentVersion"
-                                     ordinal="4"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Name of the Component"
                                      name="name"
-                                     ordinal="1"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="config status of the component"
                                      name="status"
-                                     ordinal="3"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                     <FieldDefinition
                                      aspect.isPrimaryKey="false"
                                      baseType="STRING"
                                      description="Type of action."
                                      name="type"
-                                     ordinal="2"></FieldDefinition>
+                                     ordinal="0"></FieldDefinition>
                                 </FieldDefinitions>
                             </DataShape>
                             <Rows></Rows>

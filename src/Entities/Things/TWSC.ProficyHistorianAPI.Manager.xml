@@ -6,7 +6,7 @@
     <Things>
         <Thing
          aspect.isSystemObject="false"
-         description="Flexible connectivity to a Proficy Historian server's REST API"
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          effectiveThingPackage="ConfiguredThing"
          enabled="true"
@@ -324,9 +324,21 @@
                     <Rows>
                         <Row>
                             <Password></Password>
-                            <ServerURL></ServerURL>
-                            <TokenURL></TokenURL>
-                            <Username></Username>
+                            <ServerURL>
+                            <![CDATA[
+                            https://historian-server:8443/historian-rest-api
+                            ]]>
+                            </ServerURL>
+                            <TokenURL>
+                            <![CDATA[
+                            https://historian-server:8443/uaa/oauth/token
+                            ]]>
+                            </TokenURL>
+                            <Username>
+                            <![CDATA[
+                            historian_api_user
+                            ]]>
+                            </Username>
                         </Row>
                     </Rows>
                 </ConfigurationTable>

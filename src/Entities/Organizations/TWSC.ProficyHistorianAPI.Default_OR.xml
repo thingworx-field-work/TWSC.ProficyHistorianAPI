@@ -5,7 +5,7 @@
  universal="password">
     <Organizations>
         <Organization
-         description=""
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          homeMashup=""
          loginButtonStyle=""
@@ -49,10 +49,10 @@
                  to="Root"></Connection>
                 <Connection
                  from="Root"
-                 to="TWSC.ProficyHistorianAPI.Admin_UG"></Connection>
+                 to="TWSC.ProficyHistorianAPI.Default_UG"></Connection>
                 <Connection
                  from="Root"
-                 to="TWSC.ProficyHistorianAPI.Default_UG"></Connection>
+                 to="TWSC.ProficyHistorianAPI.Admin_UG"></Connection>
             </Connections>
             <OrganizationalUnits>
                 <OrganizationalUnit

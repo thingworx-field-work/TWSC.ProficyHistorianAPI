@@ -6,7 +6,7 @@
     <DataShapes>
         <DataShape
          baseDataShape=""
-         description=""
+         description="Configurable Proficy Historian REST API integration"
          documentationContent=""
          homeMashup=""
          name="TWSC.ProficyHistorianAPI.VisibilityPermissions_DS"
