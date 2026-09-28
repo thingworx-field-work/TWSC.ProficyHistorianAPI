@@ -107,7 +107,14 @@
                      description=""
                      name="result"
                      ordinal="0"></ResultType>
-                    <ParameterDefinitions></ParameterDefinitions>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.defaultValue="&gt;"
+                         baseType="STRING"
+                         description=""
+                         name="entityDelimiter"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
                 </ServiceDefinition>
                 <ServiceDefinition
                  aspect.isAsync="false"
@@ -125,6 +132,12 @@
                      name="result"
                      ordinal="0"></ResultType>
                     <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.defaultValue="&gt;"
+                         baseType="STRING"
+                         description=""
+                         name="entityDelimiter"
+                         ordinal="2"></FieldDefinition>
                         <FieldDefinition
                          aspect.isRequired="true"
                          baseType="STRING"
@@ -149,15 +162,11 @@
                      ordinal="0"></ResultType>
                     <ParameterDefinitions>
                         <FieldDefinition
+                         aspect.isRequired="true"
                          baseType="STRING"
                          description=""
-                         name="propertyName"
-                         ordinal="2"></FieldDefinition>
-                        <FieldDefinition
-                         baseType="STRING"
-                         description=""
-                         name="thingName"
-                         ordinal="1"></FieldDefinition>
+                         name="tagName"
+                         ordinal="3"></FieldDefinition>
                     </ParameterDefinitions>
                 </ServiceDefinition>
                 <ServiceDefinition
@@ -176,16 +185,29 @@
                      ordinal="0"></ResultType>
                     <ParameterDefinitions>
                         <FieldDefinition
+                         aspect.isRequired="true"
                          baseType="STRING"
                          description=""
-                         name="propertyName"
-                         ordinal="2"></FieldDefinition>
-                        <FieldDefinition
-                         baseType="STRING"
-                         description=""
-                         name="thingName"
+                         name="tagName"
                          ordinal="1"></FieldDefinition>
                     </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category="Historian Tags"
+                 description="Returns all tags in Historian"
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianTags">
+                    <ResultType
+                     aspect.dataShape="GenericStringList"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions></ParameterDefinitions>
                 </ServiceDefinition>
                 <ServiceDefinition
                  aspect.isAsync="false"
@@ -314,6 +336,7 @@
                  isPrivate="false"
                  name="QueryHistorianMultipleTags">
                     <ResultType
+                     aspect.dataShape="TWSC.ProficyHistorianAPI.Sample_DS"
                      baseType="INFOTABLE"
                      description=""
                      name="result"
@@ -332,22 +355,17 @@
                          name="maxItems"
                          ordinal="5"></FieldDefinition>
                         <FieldDefinition
-                         aspect.dataShape="PropertyList"
-                         baseType="INFOTABLE"
-                         description=""
-                         name="propertyNames"
-                         ordinal="5"></FieldDefinition>
-                        <FieldDefinition
                          aspect.isRequired="true"
                          baseType="DATETIME"
                          description=""
                          name="startDate"
                          ordinal="2"></FieldDefinition>
                         <FieldDefinition
-                         baseType="STRING"
+                         aspect.dataShape="GenericStringList"
+                         baseType="INFOTABLE"
                          description=""
-                         name="thingName"
-                         ordinal="4"></FieldDefinition>
+                         name="tagNames"
+                         ordinal="7"></FieldDefinition>
                     </ParameterDefinitions>
                 </ServiceDefinition>
                 <ServiceDefinition
@@ -360,7 +378,7 @@
                  isPrivate="false"
                  name="QueryHistorianSingleTag">
                     <ResultType
-                     aspect.dataShape="NumberValueStream"
+                     aspect.dataShape="TWSC.ProficyHistorianAPI.Sample_DS"
                      baseType="INFOTABLE"
                      description=""
                      name="result"
@@ -380,21 +398,16 @@
                          ordinal="5"></FieldDefinition>
                         <FieldDefinition
                          aspect.isRequired="true"
-                         baseType="STRING"
-                         description=""
-                         name="propertyName"
-                         ordinal="1"></FieldDefinition>
-                        <FieldDefinition
-                         aspect.isRequired="true"
                          baseType="DATETIME"
                          description=""
                          name="startDate"
                          ordinal="2"></FieldDefinition>
                         <FieldDefinition
+                         aspect.isRequired="true"
                          baseType="STRING"
                          description=""
-                         name="thingName"
-                         ordinal="4"></FieldDefinition>
+                         name="tagName"
+                         ordinal="6"></FieldDefinition>
                     </ParameterDefinitions>
                 </ServiceDefinition>
             </ServiceDefinitions>
@@ -532,11 +545,11 @@
                                     <![CDATA[
                                     // Returns the properties that can be charted for a given entity
                                     let result = DataShapes["EntityList"].CreateValues();
-                                    const THING_DELIMITER = ">";
+                                    
                                     try {
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: 10000 /* STRING */ ,
-                                    		Parameter1: "*" + THING_DELIMITER + "*",
+                                    		Parameter1: "*" + entityDelimiter + "*",
                                     		Parameter4: undefined /* STRING */ ,
                                     		Parameter3: undefined /* STRING */ ,
                                     		Parameter6: undefined /* STRING */ ,
@@ -546,8 +559,8 @@
                                     	});
                                         
                                     	let seenEntities = {};
-                                    	tagsJSON.Tags.forEach(tag => {
-                                    		const [entityName, property] = tag.split(THING_DELIMITER);
+                                    	response.Tags.forEach(tag => {
+                                    		const [entityName, property] = tag.split(entityDelimiter);
                                     
                                     		if (entityName && !seenEntities[entityName]) {
                                     			seenEntities[entityName] = true;
@@ -594,11 +607,10 @@
                                     <![CDATA[
                                     // Returns the properties that can be charted for a given entity
                                     let result = DataShapes["GenericStringList"].CreateValues();
-                                    const THING_DELIMITER = ">";
                                     try {
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: 10000 /* STRING */ ,
-                                    		Parameter1: entityName + THING_DELIMITER + "*", // use > delimitoeryr
+                                    		Parameter1: entityName + entityDelimiter + "*",
                                     		Parameter4: undefined /* STRING */ ,
                                     		Parameter3: undefined /* STRING */ ,
                                     		Parameter6: undefined /* STRING */ ,
@@ -607,8 +619,8 @@
                                     		RequestBody: undefined
                                     	});
                                     
-                                    	tagsJSON.Tags.forEach(item => {
-                                    		const [thingName, property] = item.split(">");
+                                    	response.Tags.forEach(item => {
+                                    		const [thingName, property] = item.split(entityDelimiter);
                                     		if (entityName == thingName && property.length > 0) {
                                     			result.AddRow({item: property});
                                     		}
@@ -649,11 +661,8 @@
                                     <code>
                                     <![CDATA[
                                     let result = 0;
-                                    
-                                    const THING_DELIMITER = ">";
                                     try {
-                                    	let tagName = thingName + THING_DELIMITER + propertyName;
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: undefined,
                                     		Parameter1: tagName,
                                     		Parameter4: undefined,
@@ -663,8 +672,8 @@
                                     		Parameter5: undefined,
                                     		RequestBody: undefined
                                     	});
-                                    	if (tagsJSON.HiEngineeringUnits) {
-                                    		result = tagsJSON.HiEngineeringUnits;
+                                    	if (response.HiEngineeringUnits) {
+                                    		result = response.HiEngineeringUnits;
                                     	}
                                     } catch (err) {
                                     	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
@@ -702,11 +711,8 @@
                                     <code>
                                     <![CDATA[
                                     let result = 0;
-                                    
-                                    const THING_DELIMITER = ">";
                                     try {
-                                    	let tagName = thingName + THING_DELIMITER + propertyName;
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: undefined,
                                     		Parameter1: tagName,
                                     		Parameter4: undefined,
@@ -716,9 +722,63 @@
                                     		Parameter5: undefined,
                                     		RequestBody: undefined
                                     	});
-                                    	if (tagsJSON.HiEngineeringUnits) {
-                                    		result = tagsJSON.LoEngineeringUnits;
+                                    	if (response.LoEngineeringUnits) {
+                                    		result = response.LoEngineeringUnits;
                                     	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianTags">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = DataShapes["GenericStringList"].CreateValues();
+                                    
+                                    try {
+                                    	let response = me.ExecuteRequest({
+                                    		Parameter2: undefined /* STRING */ ,
+                                    		Parameter1: undefined /* STRING */ ,
+                                    		Parameter4: undefined /* STRING */ ,
+                                    		Parameter3: undefined /* STRING */ ,
+                                    		Parameter6: undefined /* STRING */ ,
+                                    		RequestDisplayName: "Get tags",
+                                    		Parameter5: undefined /* STRING */ ,
+                                    		RequestBody: undefined
+                                    	});
+                                    
+                                    	response.Tags.forEach(tag => {
+                                    		result.AddRow({
+                                    			item: tag
+                                    		});
+                                    	});
                                     } catch (err) {
                                     	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
                                     	throw ("An error has occurred. Please check the script logs for more details.");
@@ -1001,27 +1061,12 @@
                                 <Row>
                                     <code>
                                     <![CDATA[
-                                    const THING_DELIMITER = ">";
+                                    let result = DataShapes["TWSC.ProficyHistorianAPI.Sample_DS"].CreateValues();
                                     try {
-                                    	// Create an empty Infotable
-                                    	var params = {
-                                    		infoTableName: "DynamicInfoTable" // Optional: Assign a name to the infotable
-                                    	};
-                                    	var result = Resources["InfoTableFunctions"].CreateInfoTable(params);
-                                    	// Add the timestamp
-                                    	result.AddField({name: "timestamp", baseType: "DATETIME"});
-                                    
-                                    	// Add the other fields
-                                    	let tagList = "";
-                                    	propertyNames.rows.toArray().forEach(row => {
-                                    		let propertyName = row.name;
-                                    		result.AddField({name: propertyName, baseType: "NUMBER"});
-                                    		tagList += thingName + THING_DELIMITER + propertyName + ";";
-                                    	});
-                                    	tagList = tagList.slice(0, -1); // remove last semicolon
+                                    	let tagList = tagNames.rows.toArray().map(row => row.item).join(";");
                                     
                                     	let minimum = Math.min(5000, maxItems).toString();
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: startDate.toISOString(),
                                     		Parameter1: tagList,
                                     		Parameter4: minimum,
@@ -1031,21 +1076,27 @@
                                     		Parameter5: "1",
                                     		RequestBody: undefined
                                     	});
-                                        tagsJSON = JSON.parse(tagsJSON);
-                                    	// logger.error(tagList +" "+ startDate.toISOString()+" "+ endDate.toISOString()+" "+minumum);
-                                    	// logger.error(JSON.stringify(tagsJSON));	
-                                    	tagsJSON.Data.forEach(data => {
-                                    		let propertyName = data.TagName.split('>')[1].trim();
+                                    
+                                    	response.Data.forEach(data => {
+                                    		let tagName = data.TagName;
                                     		const dataItem = data;
                                     		dataItem.Samples.forEach(sample => {
                                     			let dt = parseDateISO(sample.TimeStamp);
                                     			if (dt >= startDate && dt <= endDate) {
-                                    				var newRow = {};
-                                    				newRow.timestamp = parseDateISO(sample.TimeStamp);
-                                    				newRow[propertyName] = sample.Value;
-                                    				result.AddRow(newRow);
+                                    				result.AddRow({
+                                    					TagName: tagName,
+                                    					TimeStamp: dt,
+                                    					Value: sample.Value,
+                                    					Quality: sample.Quality
+                                    				});
                                     			}
                                     		});
+                                    	});
+                                    
+                                    	result = Resources["InfoTableFunctions"].Sort({
+                                    		sortColumn: "TimeStamp" /* STRING */ ,
+                                    		t: result /* INFOTABLE */ ,
+                                    		ascending: undefined /* BOOLEAN {"defaultValue":true} */
                                     	});
                                     } catch (err) {
                                     	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
@@ -1082,35 +1133,39 @@
                                 <Row>
                                     <code>
                                     <![CDATA[
-                                    let result = DataShapes["NumberValueStream"].CreateValues();
-                                    const THING_DELIMITER = ">";
+                                    let result = DataShapes["TWSC.ProficyHistorianAPI.Sample_DS"].CreateValues();
                                     try {
-                                        let minimum = Math.min(5000, maxItems).toString();
-                                        let tagName = thingName + THING_DELIMITER + propertyName;
-                                    	let tagsJSON = me.ExecuteRequest({
+                                    	let minimum = Math.min(5000, maxItems).toString();
+                                    	let response = me.ExecuteRequest({
                                     		Parameter2: startDate.toISOString(),
                                     		Parameter1: tagName,
-                                            Parameter4: minimum,
+                                    		Parameter4: minimum,
                                     		Parameter3: endDate.toISOString(),
                                     		Parameter6: undefined,
                                     		RequestDisplayName: "Get raw data",
                                     		Parameter5: "1",
                                     		RequestBody: undefined
                                     	});
-                                        // logger.error(tagName +" "+ startDate.toISOString()+" "+ endDate.toISOString()+" "+minumum);
-                                    	// logger.error(JSON.stringify(tagsJSON));
                                     
-                                        //tagsJSON = JSON.parse(tagsJSON);
-                                    	const dataItem = tagsJSON.Data[0];
+                                    	const dataItem = response.Data[0];
                                     	dataItem.Samples.forEach(sample => {
                                     		let dt = parseDateISO(sample.TimeStamp);
                                     		if (dt >= startDate && dt <= endDate) {
                                     			result.AddRow({
-                                    				value: sample.Value, // NUMBER
-                                    				timestamp: parseDateISO(sample.TimeStamp) //DATETIME
+                                    				TimeStamp: dt,
+                                    				Value: sample.Value,
+                                    				Quality: sample.Quality,
+                                    				TagName: tagName
                                     			});
                                     		}
                                     	});
+                                    
+                                    	result = Resources["InfoTableFunctions"].Sort({
+                                    		sortColumn: "TimeStamp" /* STRING */ ,
+                                    		t: result /* INFOTABLE */ ,
+                                    		ascending: undefined /* BOOLEAN {"defaultValue":true} */
+                                    	});
+                                    
                                     } catch (err) {
                                     	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
                                     	throw ("An error has occurred. Please check the script logs for more details.");

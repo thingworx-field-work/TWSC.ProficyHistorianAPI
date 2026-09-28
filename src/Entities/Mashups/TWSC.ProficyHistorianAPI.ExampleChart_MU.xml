@@ -199,48 +199,6 @@
                       "maxResultSets" : "10"
                     },
                     "Characteristic" : "Services",
-                    "Id" : "a60386ed-f082-4d95-a65d-5b815f7b32fa",
-                    "Name" : "GetHistorianTagMax",
-                    "Parameters" : { },
-                    "RefreshInterval" : 0,
-                    "Target" : "GetHistorianTagMax"
-                  }, {
-                    "APIMethod" : "post",
-                    "Caching" : {
-                      "cache" : false,
-                      "cacheKeyParams" : [ ],
-                      "cacheStrategy" : "INSTANCE",
-                      "maxResultSets" : "10"
-                    },
-                    "Characteristic" : "Services",
-                    "Id" : "8e9b60ed-e9b0-4a40-bb74-f7d8f664cbfb",
-                    "Name" : "GetHistorianTagMin",
-                    "Parameters" : { },
-                    "RefreshInterval" : 0,
-                    "Target" : "GetHistorianTagMin"
-                  }, {
-                    "APIMethod" : "post",
-                    "Caching" : {
-                      "cache" : false,
-                      "cacheKeyParams" : [ ],
-                      "cacheStrategy" : "INSTANCE",
-                      "maxResultSets" : "10"
-                    },
-                    "Characteristic" : "Services",
-                    "Id" : "6deec2a0-6ff9-4ecd-8e28-6899b94b870a",
-                    "Name" : "QueryHistorianMultipleTags",
-                    "Parameters" : { },
-                    "RefreshInterval" : 0,
-                    "Target" : "QueryHistorianMultipleTags"
-                  }, {
-                    "APIMethod" : "post",
-                    "Caching" : {
-                      "cache" : false,
-                      "cacheKeyParams" : [ ],
-                      "cacheStrategy" : "INSTANCE",
-                      "maxResultSets" : "10"
-                    },
-                    "Characteristic" : "Services",
                     "Id" : "8d7e1642-e937-441d-ba2a-c3a883a41af5",
                     "Name" : "QueryHistorianSingleTag",
                     "Parameters" : { },
@@ -401,126 +359,6 @@
                 "TargetId" : "ptcslist-12",
                 "TargetSection" : ""
               }, {
-                "Id" : "fed32a14-0200-4797-ad25-7bb71510c52f",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "item",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "propertyName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntityTags",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "QueryHistorianSingleTag",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "3c36b10d-3dc9-478a-94da-48f5c6548e58",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "name",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "thingName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntities",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "QueryHistorianSingleTag",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "5e9a424f-8e54-4deb-9130-8ab9f1f305b1",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "item",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "propertyName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntityTags",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "GetHistorianTagMax",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "ae76c40d-4685-4cc8-a75a-85278383af4e",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "name",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "thingName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntities",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "GetHistorianTagMax",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "62ae967d-9277-40a4-a206-cf7fccebce8a",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "item",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "propertyName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntityTags",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "GetHistorianTagMin",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "af3b14d1-7419-4b39-9088-1acc4804d2ea",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "name",
-                  "SourcePropertyBaseType" : "STRING",
-                  "SourcePropertyType" : "Field",
-                  "TargetProperty" : "thingName",
-                  "TargetPropertyBaseType" : "STRING",
-                  "TargetPropertyType" : "Parameter"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "SelectedRows",
-                "SourceId" : "GetHistorianEntities",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "Data",
-                "TargetId" : "GetHistorianTagMin",
-                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
-              }, {
-                "Id" : "96a1bdc5-5f1a-4c80-8473-4cf478fbdcd5",
-                "PropertyMaps" : [ {
-                  "SourceProperty" : "",
-                  "SourcePropertyBaseType" : "INFOTABLE",
-                  "SourcePropertyType" : "InfoTable",
-                  "TargetProperty" : "Data",
-                  "TargetPropertyBaseType" : "INFOTABLE",
-                  "TargetPropertyType" : "property"
-                } ],
-                "SourceArea" : "Data",
-                "SourceDetails" : "AllData",
-                "SourceId" : "QueryHistorianSingleTag",
-                "SourceName" : "QueryHistorianSingleTag",
-                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "TargetArea" : "UI",
-                "TargetId" : "ptcschartline-8",
-                "TargetSection" : ""
-              }, {
                 "Id" : "3c873687-ce18-44a9-a1e8-e82cb561648e",
                 "PropertyMaps" : [ {
                   "SourceProperty" : "result",
@@ -554,12 +392,28 @@
                 "TargetId" : "ptcsdatepicker-15",
                 "TargetSection" : ""
               }, {
-                "Id" : "eb423aa9-8d18-4672-850f-0539f93bdf76",
+                "Id" : "76e09403-d01c-4a27-a0ed-4182111542eb",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "Output",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "property",
+                  "TargetProperty" : "tagName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "Parameter"
+                } ],
+                "SourceArea" : "UI",
+                "SourceId" : "expression2-20",
+                "SourceSection" : "",
+                "TargetArea" : "Data",
+                "TargetId" : "QueryHistorianSingleTag",
+                "TargetSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS"
+              }, {
+                "Id" : "5426215e-ce53-4943-98a5-bc3aeb0ecf27",
                 "PropertyMaps" : [ {
                   "SourceProperty" : "item",
                   "SourcePropertyBaseType" : "STRING",
                   "SourcePropertyType" : "Field",
-                  "TargetProperty" : "Label",
+                  "TargetProperty" : "propertyName",
                   "TargetPropertyBaseType" : "STRING",
                   "TargetPropertyType" : "property"
                 } ],
@@ -568,7 +422,42 @@
                 "SourceId" : "GetHistorianEntityTags",
                 "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
                 "TargetArea" : "UI",
-                "TargetId" : "ptcschartline-8",
+                "TargetId" : "expression2-20",
+                "TargetSection" : ""
+              }, {
+                "Id" : "fc33596f-5020-4fee-932e-b580509c2846",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "name",
+                  "SourcePropertyBaseType" : "STRING",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "entityName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "SelectedRows",
+                "SourceId" : "GetHistorianEntities",
+                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
+                "TargetArea" : "UI",
+                "TargetId" : "expression2-20",
+                "TargetSection" : ""
+              }, {
+                "Id" : "6d88f36a-f5d1-4fe9-9701-208be4752a09",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "",
+                  "SourcePropertyBaseType" : "INFOTABLE",
+                  "SourcePropertyType" : "InfoTable",
+                  "TargetProperty" : "Data",
+                  "TargetPropertyBaseType" : "INFOTABLE",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "QueryHistorianSingleTag",
+                "SourceName" : "QueryHistorianSingleTag",
+                "SourceSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
+                "TargetArea" : "UI",
+                "TargetId" : "ptcschartline-21",
                 "TargetSection" : ""
               } ],
               "DesignTimePermissions" : { },
@@ -590,33 +479,6 @@
                 "EventTriggerId" : "GetHistorianEntities",
                 "EventTriggerSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
                 "Id" : "43bf63ce-cd6e-44bd-9b66-54b311d660bc"
-              }, {
-                "EventHandlerArea" : "Data",
-                "EventHandlerId" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "EventHandlerService" : "GetHistorianTagMax",
-                "EventTriggerArea" : "Data",
-                "EventTriggerEvent" : "SelectedRowsChanged",
-                "EventTriggerId" : "GetHistorianEntityTags",
-                "EventTriggerSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "Id" : "8082d40d-4a3f-4149-b47f-6dc460165d90"
-              }, {
-                "EventHandlerArea" : "Data",
-                "EventHandlerId" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "EventHandlerService" : "GetHistorianTagMin",
-                "EventTriggerArea" : "Data",
-                "EventTriggerEvent" : "SelectedRowsChanged",
-                "EventTriggerId" : "GetHistorianEntityTags",
-                "EventTriggerSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "Id" : "43edc1ed-c4f2-4540-904a-1c06706ad93f"
-              }, {
-                "EventHandlerArea" : "Data",
-                "EventHandlerId" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "EventHandlerService" : "QueryHistorianSingleTag",
-                "EventTriggerArea" : "Data",
-                "EventTriggerEvent" : "SelectedRowsChanged",
-                "EventTriggerId" : "GetHistorianEntityTags",
-                "EventTriggerSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
-                "Id" : "8a27b07a-5af5-44f2-b293-f3b289299129"
               }, {
                 "EventHandlerArea" : "Data",
                 "EventHandlerId" : "Things_TWSC.ProficyHistorianAPI.EntryPoint",
@@ -644,6 +506,24 @@
                 "EventTriggerId" : "mashup-root",
                 "EventTriggerSection" : "",
                 "Id" : "b47b1e5e-3912-4865-91b2-7241f2293cee"
+              }, {
+                "EventHandlerArea" : "UI",
+                "EventHandlerId" : "expression2-20",
+                "EventHandlerService" : "Evaluate",
+                "EventTriggerArea" : "Data",
+                "EventTriggerEvent" : "SelectedRowsChanged",
+                "EventTriggerId" : "GetHistorianEntityTags",
+                "EventTriggerSection" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
+                "Id" : "eb923dff-987f-4179-8ae5-7e9c9a8cc69a"
+              }, {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "DynamicThingShapes_TWSC.ProficyHistorianAPI.Management_TS",
+                "EventHandlerService" : "QueryHistorianSingleTag",
+                "EventTriggerArea" : "UI",
+                "EventTriggerEvent" : "Changed",
+                "EventTriggerId" : "expression2-20",
+                "EventTriggerSection" : "",
+                "Id" : "5da16412-63a9-4334-95d9-672d32710e71"
               } ],
               "Reminders" : [ ],
               "RunTimePermissions" : { },
@@ -896,7 +776,7 @@
                   "Z-index" : 10,
                   "__TypeDisplayName" : "Mashup",
                   "_baseVersion" : "9.7.0-b47",
-                  "id_index" : 19,
+                  "id_index" : 21,
                   "secureExpressionsOnly" : true,
                   "supportsAutoResize" : true
                 },
@@ -912,7 +792,7 @@
                     "ExpandTabIcon" : "",
                     "Expanded" : true,
                     "Id" : "flexcontainer-2",
-                    "LastContainer" : false,
+                    "LastContainer" : true,
                     "LazyLoading" : false,
                     "Left" : 0,
                     "Margin" : "20",
@@ -1566,8 +1446,8 @@
                             "Area" : "UI",
                             "ChartType" : "linechart",
                             "CurveFitting" : "linear",
-                            "DataField1" : "value",
-                            "DataLabel1" : "Value",
+                            "DataField1" : "Value",
+                            "DataLabel1" : "",
                             "DataLabel10" : "",
                             "DataLabel11" : "",
                             "DataLabel12" : "",
@@ -1621,7 +1501,7 @@
                             "DirectSelectionZoom" : "none",
                             "DisableLegacyCustomClassStyles" : false,
                             "Disabled" : false,
-                            "DisplayName" : "ptcs-chartline-8",
+                            "DisplayName" : "ptcs-chartline-21",
                             "DragSelectionZoom" : "none",
                             "EmptyChartIcon" : "cds:icon_not_visible",
                             "EmptyChartLabel" : "[[ChartStateLabelEmpty]]",
@@ -1651,14 +1531,14 @@
                             "HorizontalSliderZoomMinLabel" : "",
                             "HorizontalStartZoomLabel" : "",
                             "HorizontalZoom" : false,
-                            "Id" : "ptcschartline-8",
+                            "Id" : "ptcschartline-21",
                             "Label" : "[[LineChart]]",
                             "LabelAlignment" : "left",
                             "LabelPosition" : "top",
                             "LabelReset" : "[[reset]]",
                             "LabelType" : "sub-header",
                             "LastContainer" : false,
-                            "Left" : 144.71875,
+                            "Left" : 249.59716796875,
                             "LegendAlignment" : "start",
                             "LegendFilter" : false,
                             "LegendMarkerShapes" : "square",
@@ -1780,7 +1660,7 @@
                             "StringSelectAll" : "[[selectAll]]",
                             "StringStart" : "[[startRange]]",
                             "TabSequence" : 0,
-                            "Top" : 102,
+                            "Top" : 86.36456298828125,
                             "Type" : "ptcschartline",
                             "UseSampleDataInRuntime" : false,
                             "UseSecondYAxis1" : false,
@@ -1818,9 +1698,9 @@
                             "Visible" : true,
                             "Width" : 471,
                             "XAxisDateFormatToken" : "",
-                            "XAxisField" : "timestamp",
+                            "XAxisField" : "TimeStamp",
                             "XAxisFormat" : "0000.0",
-                            "XAxisLabel" : "Timestamp",
+                            "XAxisLabel" : "",
                             "XAxisLabelAlignment" : "start",
                             "XAxisMaximumValues" : "",
                             "XAxisMinimumValues" : "",
@@ -1847,6 +1727,7 @@
                     "Area" : "UI",
                     "AutoEvaluate" : true,
                     "DataChangeType" : "VALUE",
+                    "DefaultNumberEvaluation" : false,
                     "DisableInitialOutput" : false,
                     "DisplayName" : "GetStartDate",
                     "Expression" : "output = new Date().setHours(new Date().getHours() - 1);",
@@ -1854,8 +1735,35 @@
                     "Height" : 28,
                     "Id" : "expression2-17",
                     "LastContainer" : false,
+                    "Left" : 0,
                     "Margin" : "5",
                     "OutputBaseType" : "DATETIME",
+                    "ResponsiveLayout" : false,
+                    "ShowDataLoading" : true,
+                    "Top" : 0,
+                    "Type" : "expression2",
+                    "Visible" : true,
+                    "Width" : 200,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Expression",
+                    "_baseVersion" : "9.7.0",
+                    "_currentParameterDefs" : [ ]
+                  },
+                  "Widgets" : [ ]
+                }, {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "AutoEvaluate" : true,
+                    "DataChangeType" : "VALUE",
+                    "DisableInitialOutput" : false,
+                    "DisplayName" : "GetTagName",
+                    "Expression" : "output = entityName + \">\" + propertyName;",
+                    "FireOnFirstValue" : false,
+                    "Height" : 28,
+                    "Id" : "expression2-20",
+                    "LastContainer" : false,
+                    "Margin" : "5",
+                    "OutputBaseType" : "STRING",
                     "ResponsiveLayout" : false,
                     "ShowDataLoading" : true,
                     "Type" : "expression2",
@@ -1864,7 +1772,25 @@
                     "Z-index" : 10,
                     "__TypeDisplayName" : "Expression",
                     "_baseVersion" : "9.7.0",
-                    "_currentParameterDefs" : [ ]
+                    "_currentParameterDefs" : [ {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "entityName",
+                      "bindingDirection" : "Target",
+                      "bindingType" : "Property",
+                      "isBindingSource" : false,
+                      "isBindingTarget" : true,
+                      "shown" : true
+                    }, {
+                      "BaseType" : "STRING",
+                      "Description" : "",
+                      "ParameterName" : "propertyName",
+                      "bindingDirection" : "Target",
+                      "bindingType" : "Property",
+                      "isBindingSource" : false,
+                      "isBindingTarget" : true,
+                      "shown" : true
+                    } ]
                   },
                   "Widgets" : [ ]
                 } ]

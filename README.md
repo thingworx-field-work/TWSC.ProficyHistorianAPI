@@ -182,21 +182,19 @@ Retrieves the configured maximum engineering unit value for a Historian tag, all
 Retrieves the configured minimum engineering unit value for a Historian tag, allowing visualizations and analytics to use Historian-defined lower limits when displaying data.
 
 ### QueryHistorianSingleTag
-Returns historical values for a single Historian tag as a ThingWorx Value Stream style InfoTable.
+Returns historical values for a single Historian tag as an InfoTable.
 
 Inputs:
-- Thing Name
-- Property Name
+- Tag Name
 - Start Date
 - End Date
 - Maximum Items
 
 ### QueryHistorianMultipleTags
-Returns multiple Historian tags in a dynamic InfoTable suitable for charting and visualization.
+Returns multiple Historian tags in an InfoTable suitable for charting and visualization.
 
 Inputs:
-- Thing Name
-- Property Names (InfoTable)
+- Tag Names Names (InfoTable)
 - Start Date
 - End Date
 - Maximum Items
