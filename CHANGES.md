@@ -2,6 +2,11 @@
 
 Notable changes to the ThingWorx Proficy Historian API Building Block are documented in this file.
 
+## 2026-10-27
+
+- Added the `TWSC.ProficyHistorianChartsProvider` wrapper Building Block to this repository for use with SCPA-enabled assets (requires SCPA 2.0.7 or above).
+- Documented the asset `providerThing` setup and access to Execute Request and API configuration in SCPA Admin.
+
 ## [0.1.1] - 2026-09-28
 
 - Added `GetHistorianTags` service to retrieve all Historian tags

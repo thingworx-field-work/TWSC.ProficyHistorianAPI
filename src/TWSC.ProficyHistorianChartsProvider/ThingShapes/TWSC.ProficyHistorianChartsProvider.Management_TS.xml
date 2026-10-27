@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <ThingShapes>
+        <ThingShape
+         aspect.isSystemObject="false"
+         className=""
+         description="SCPA Charts Provider for the Proficy Historian API"
+         documentationContent=""
+         homeMashup=""
+         name="TWSC.ProficyHistorianChartsProvider.Management_TS"
+         projectName="TWSC.ProficyHistorianChartsProvider"
+         tags="">
+            <PropertyDefinitions></PropertyDefinitions>
+            <ServiceDefinitions></ServiceDefinitions>
+            <EventDefinitions></EventDefinitions>
+            <ServiceMappings></ServiceMappings>
+            <ServiceImplementations></ServiceImplementations>
+            <Subscriptions></Subscriptions>
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianChartsProvider.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianChartsProvider.Default_OR:TWSC.ProficyHistorianChartsProvider.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+        </ThingShape>
+    </ThingShapes>
+</Entities>

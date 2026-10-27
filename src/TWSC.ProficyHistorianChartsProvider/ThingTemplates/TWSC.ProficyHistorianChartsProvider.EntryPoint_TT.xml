@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <ThingTemplates>
+        <ThingTemplate
+         aspect.isSystemObject="false"
+         baseThingTemplate="PTC.Base.ComponentEntryPoint_TT"
+         description="SCPA Charts Provider for the Proficy Historian API"
+         documentationContent=""
+         effectiveThingPackage="ConfiguredThing"
+         homeMashup=""
+         inheritedValueStream=""
+         name="TWSC.ProficyHistorianChartsProvider.EntryPoint_TT"
+         projectName="TWSC.ProficyHistorianChartsProvider"
+         tags=""
+         thingPackage=""
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianChartsProvider.Default_OR"
+                     type="Organization"></Principal>
+                    <Principal
+                     isPermitted="true"
+                     name="TWSC.ProficyHistorianChartsProvider.Default_OR:TWSC.ProficyHistorianChartsProvider.Admin_UG"
+                     type="OrganizationalUnit"></Principal>
+                </Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Configuration table to store the components core manager"
+                 isMultiRow="true"
+                 name="ComponentManager"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="true"
+                             baseType="STRING"
+                             description="unique identifier for the manager that needs to be configured"
+                             name="id"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             aspect.thingShape="PTC.Base.CommonManagement_TS"
+                             baseType="THINGNAME"
+                             description="Name of the Manager Thing to be configured"
+                             name="managerThingName"
+                             ordinal="2"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows></Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions></ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="DeployComponent">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = false;
+                                        try {
+                                        
+                                        	let modelManagementEntryPoint = "PTC.ModelManagement.EntryPoint";
+                                        	if (Things[modelManagementEntryPoint]) {
+                                        		let modelManagementManager = Things[modelManagementEntryPoint].GetConfiguredComponentManager();
+                                        		Things[modelManagementManager].AddLocalizationToken({
+                                        			tableName: 'Default' /* STRING */ ,
+                                        			tokenName: 'TWSC.ProficyHistorianChartsProvider.AdminConfiguration' /* STRING */ ,
+                                        			tokenValue: 'Configuration' /* STRING */ ,
+                                        			tokenContext: 'Admin Menu' /* STRING */ ,
+                                        			tokenUsage: 'label' /* STRING */
+                                        		});
+                                        		Things[modelManagementManager].AddLocalizationToken({
+                                        			tableName: 'Default' /* STRING */ ,
+                                        			tokenName: 'TWSC.ProficyHistorianAPI.ExecuteRequest' /* STRING */ ,
+                                        			tokenValue: 'Execute Request' /* STRING */ ,
+                                        			tokenContext: 'Admin Menu' /* STRING */ ,
+                                        			tokenUsage: 'label' /* STRING */
+                                        		});
+                                        	}
+                                        
+                                            // Add the Editable Configuration Table to the TWSC.ProficyHistorianAPI BB for the AdminConfiguration MU to use
+                                        	const configurationManagementEntryPoint = "PTCTS.ConfigurationManagement.EntryPoint";
+                                        	if (Things[configurationManagementEntryPoint]) {
+                                        		const configurationManager = Things[configurationManagementEntryPoint].GetConfiguredComponentManager();
+                                        		const componentManager = Things['TWSC.ProficyHistorianAPI.EntryPoint'].GetConfiguredComponentManager();
+                                        
+                                        		const tableName = "EditableConfigurationTables";
+                                        
+                                        		// GetConfigurationTable throws when the table is not defined on this manager.
+                                        		try {
+                                        			Things[componentManager].GetConfigurationTable({
+                                        				tableName: tableName
+                                        			});
+                                        		} catch (tableLookupError) {
+                                        			Things[componentManager].AddConfigurationTableDefinition({
+                                        				isMultiRow: true,
+                                        				name: tableName,
+                                        				dataShapeName: "PTCTS.ConfigurationManagement.EditableConfigurationTables_DS"
+                                        			});
+                                        		}
+                                        
+                                        		const jsonRows = {
+                                        			rows: [{
+                                        				ConfigurationTableName: "RequestConfiguration",
+                                        				Description: "APIs available to call from Proficy Historian",
+                                        				DisplayName: "API Request Specifications",
+                                        				AllowAdd: false,
+                                        				AllowEdit: false,
+                                        				AllowDelete: false,
+                                        				DefaultConfigurableJSON: {}
+                                        			}]
+                                        		};
+                                        
+                                        		Things[configurationManager].AddRowsToManagerConfigurationTable({
+                                        			jsonRows: jsonRows,
+                                        			managerName: componentManager,
+                                        			configurationTableName: tableName,
+                                        			primaryKey: "ConfigurationTableName"
+                                        		});
+                                        	}
+                                        
+                                        	result = true;
+                                        
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <ImplementedShapes></ImplementedShapes>
+            <SharedConfigurationTables></SharedConfigurationTables>
+            <InstanceDesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </InstanceDesignTimePermissions>
+            <InstanceRunTimePermissions></InstanceRunTimePermissions>
+            <InstanceVisibilityPermissions>
+                <Visibility></Visibility>
+            </InstanceVisibilityPermissions>
+        </ThingTemplate>
+    </ThingTemplates>
+</Entities>

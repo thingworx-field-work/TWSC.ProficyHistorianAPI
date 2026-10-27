@@ -250,6 +250,25 @@ Example:
 /v1/example/{parameter1}/{parameter2}
 ```
 
+## SCPA Charts Provider
+The repository also includes the `TWSC.ProficyHistorianChartsProvider` Building Block, a wrapper that makes Proficy Historian data available to charts on SCPA-enabled assets. **SCPA 2.0.7 or above is required.**
+
+After importing, configuring, and initializing the API and Charts Provider Building Blocks:
+
+1. Open the SCPA-enabled asset Thing in ThingWorx Composer.
+2. Set its `providerThing` property to `TWSC.ProficyHistorianChartsProvider.Provider`.
+3. Save the asset Thing to use the Proficy Historian Charts Provider for that asset.
+
+![Screenshot of an SCPA-enabled asset Thing with providerThing set to TWSC.ProficyHistorianChartsProvider.Provider](docs/images/screenshot-scpa-thing-chartsprovider.png)
+
+In **SCPA Admin**, open the **Proficy Historian** menu. Select **Configuration** to configure the API request definitions, or **Execute Request** to open the API testing mashup (`TWSC.ProficyHistorianAPI.ExecuteRequest_MU`).
+
+![Screenshot of the SCPA Admin Proficy Historian menu showing Configuration and Execute Request, with API request specifications displayed](docs/images/screenshot-scpa-admin.png)
+
+Once configured, open the asset's **Asset Details > Charts** page in SCPA to view Proficy Historian data.
+
+![Screenshot of the SCPA Asset Details Charts page displaying Proficy Historian data](docs/images/screenshot-scpa-assetdetails-charts.png)
+
 ## Limitations
 This implementation was developed as a proof of concept and assumes:
 
@@ -267,7 +286,7 @@ Additional Historian deployments may require modifications to request definition
 ## License
 MIT License
 
-Copyright (c) 2026 Eliot Landrum
+Copyright (c) 2026 Velotic
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

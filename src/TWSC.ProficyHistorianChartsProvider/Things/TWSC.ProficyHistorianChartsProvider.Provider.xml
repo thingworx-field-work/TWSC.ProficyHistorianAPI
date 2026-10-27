@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <Things>
+        <Thing
+         description=""
+         documentationContent=""
+         effectiveThingPackage="ConfiguredThing"
+         enabled="true"
+         homeMashup=""
+         identifier=""
+         inheritedValueStream=""
+         name="TWSC.ProficyHistorianChartsProvider.Provider"
+         projectName="TWSC.ProficyHistorianChartsProvider"
+         published="false"
+         tags=""
+         thingTemplate="GenericThing"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions></ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetChartTrendProperties">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // GetChartTrendProperties returns the properties that can be charted.  See PTC.Charts.DefaultProvider->GetChartTrendProperties
+                                        // for an example of how this service works with ThingWorx
+                                        let result = DataShapes["GenericStringList"].CreateValues();
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        	let tagsJSON = Things[manager].ExecuteRequest({
+                                        		Parameter2: 10000 /* STRING */ ,
+                                        		Parameter1: entityName + THING_DELIMITER + "*",
+                                        		Parameter4: undefined /* STRING */ ,
+                                        		Parameter3: undefined /* STRING */ ,
+                                        		Parameter6: undefined /* STRING */ ,
+                                        		RequestDisplayName: "Get tags with name mask",
+                                        		Parameter5: undefined /* STRING */ ,
+                                        		RequestBody: undefined
+                                        	});
+                                        	let obj = Object();
+                                        	tagsJSON.Tags.forEach(item => {
+                                        		const [thingName, property] = item.split(THING_DELIMITER);
+                                        		if (entityName == thingName && property.length > 0) {
+                                        			obj.item = property;
+                                        			result.AddRow(obj);
+                                        		}
+                                        	});
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetLoggedPropertiesForThing">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        // GetLoggedPropertiesForThing returns the properties that can be charted.  See PTC.Charts.DefaultProvider->GetLoggedPropertiesForThing
+                                        // for an example of how this service works with ThingWorx
+                                        let result = DataShapes["PropertyDefinition"].CreateValues();
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        	let tagsJSON = Things[manager].ExecuteRequest({
+                                        		Parameter2: 10000 /* STRING */ ,
+                                        		Parameter1: thingName + THING_DELIMITER + "*",
+                                        		Parameter4: undefined /* STRING */ ,
+                                        		Parameter3: undefined /* STRING */ ,
+                                        		Parameter6: undefined /* STRING */ ,
+                                        		RequestDisplayName: "Get tags with name mask",
+                                        		Parameter5: undefined /* STRING */ ,
+                                        		RequestBody: undefined
+                                        	});
+                                        
+                                        	tagsJSON.Tags.forEach(item => {
+                                        		const [myThingName, property] = item.split(THING_DELIMITER);
+                                        		if (thingName == myThingName && property.length > 0) {
+                                        			let tagName = thingName + THING_DELIMITER + property;
+                                        			let tagJSON = Things[manager].ExecuteRequest({
+                                        				Parameter2: undefined,
+                                        				Parameter1: tagName,
+                                        				Parameter4: undefined,
+                                        				Parameter3: undefined,
+                                        				Parameter6: undefined,
+                                        				RequestDisplayName: "Get tag properties",
+                                        				Parameter5: undefined,
+                                        				RequestBody: undefined
+                                        			});
+                                        			let bType = "NUMBER"; // Number is base type 2
+                                        			if (tagJSON.DataType) {
+                                        				if (tagJSON.DataType == 7) {
+                                        					bType = "STRING";
+                                        				} else if (tagJSON.DataType == 2) { // Use NUMBER set as default
+                                        				}
+                                        			}
+                                        			result.AddRow({
+                                        				name: property,
+                                        				baseType: bType
+                                        			});
+                                        		}
+                                        	});
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetMaximumValueForCharts">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = 0;
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                        	// Use UCL property if it exists to get max property
+                                        	if (hasProperty(thingName, propertyName + "_UCL")) {
+                                        		result = Things[thingName][propertyName + "_UCL"];
+                                        	} else {
+                                        		let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagName = thingName + THING_DELIMITER + propertyName;
+                                        		let tagsJSON = Things[manager].ExecuteRequest({
+                                        			Parameter2: undefined,
+                                        			Parameter1: tagName,
+                                        			Parameter4: undefined,
+                                        			Parameter3: undefined,
+                                        			Parameter6: undefined,
+                                        			RequestDisplayName: "Get tag properties",
+                                        			Parameter5: undefined,
+                                        			RequestBody: undefined
+                                        		});
+                                        		if (tagsJSON.HiEngineeringUnits) {
+                                        			result = tagsJSON.HiEngineeringUnits;
+                                        		}
+                                        	}
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        
+                                        function hasProperty(thingName, propertyName) {
+                                        	let hasProperty = false;
+                                        	let properties = Things[thingName].GetPropertyDefinitions();
+                                        	let data = properties.rows.toArray().filter(row => row.name === propertyName);
+                                        	if (data && data.length) {
+                                        		hasProperty = true;
+                                        	}
+                                        	return hasProperty;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetMinimumValueForCharts">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = 0;
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                            // Use LCL property if it exists to get max property
+                                        	if (hasProperty(thingName, propertyName + "_LCL")) {
+                                        		result = Things[thingName][propertyName + "_LCL"];
+                                        	} else {
+                                        		let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagName = thingName + THING_DELIMITER + propertyName;
+                                        		let tagsJSON = Things[manager].ExecuteRequest({
+                                        			Parameter2: undefined,
+                                        			Parameter1: tagName,
+                                        			Parameter4: undefined,
+                                        			Parameter3: undefined,
+                                        			Parameter6: undefined,
+                                        			RequestDisplayName: "Get tag properties",
+                                        			Parameter5: undefined,
+                                        			RequestBody: undefined
+                                        		});
+                                        		if (tagsJSON.LoEngineeringUnits) {
+                                        			result = tagsJSON.LoEngineeringUnits;
+                                        		}
+                                        	}
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        
+                                        function hasProperty(thingName, propertyName) {
+                                        	let hasProperty = false;
+                                        	let properties = Things[thingName].GetPropertyDefinitions();
+                                        	let data = properties.rows.toArray().filter(row => row.name === propertyName);
+                                        	if (data && data.length) {
+                                        		hasProperty = true;
+                                        	}
+                                        	return hasProperty;
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="HasChartableData">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = true;
+                                        
+                                        // HasChartableData returns the properties that can be charted.  See PTC.Charts.DefaultProvider->HasChartableData
+                                        // for an example of how this service works with ThingWorx
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="HasDataSourceForCharts">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = true;
+                                        
+                                        // HasDataSourceForCharts returns true when the data source is availible.  See PTC.Charts.DefaultProvider-> HasDataSourceForCharts
+                                        // for an example of how this service works with ThingWorx streams
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="IsThingPropertyChartable">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = false;
+                                        
+                                        try {
+                                        	let LoggedPropertiesForThing = me.GetChartTrendProperties({
+                                        		entityName: thingName /* STRING */ ,
+                                        		entityType: "Thing" /* STRING {"defaultValue":"Thing"} */ ,
+                                        		includeParentTemplateProperties: undefined /* BOOLEAN */ ,
+                                        		includeThingShapeProperties: undefined /* BOOLEAN {"defaultValue":false} */
+                                        	});
+                                        
+                                        	if (LoggedPropertiesForThing.Find({
+                                        			item: propertyName
+                                        		})) {
+                                        		result = true;
+                                        	}
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="QueryMultiPropertiesForCharts">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = Resources["InfoTableFunctions"].CreateInfoTable({
+                                        	infoTableName: "DynamicInfoTable"
+                                        });
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        
+                                        	// Add the timestamp
+                                        	result.AddField({
+                                        		name: "timestamp",
+                                        		baseType: "DATETIME"
+                                        	});
+                                        
+                                        	// Add the other fields
+                                        	let tagList = propertyNames.rows.toArray().map(row => {
+                                        		result.AddField({
+                                        			name: row.name,
+                                        			baseType: "NUMBER"
+                                        		});
+                                        		return thingName + THING_DELIMITER + row.name;
+                                        	}).join(";");
+                                        
+                                        	let minimum = Math.min(5000, maxItems).toString();
+                                        	let dataJSON = Things[manager].ExecuteRequest({
+                                        		Parameter2: startDate.toISOString(),
+                                        		Parameter1: tagList,
+                                        		Parameter4: minimum,
+                                        		Parameter3: endDate.toISOString(),
+                                        		Parameter6: undefined,
+                                        		RequestDisplayName: "Get raw data",
+                                        		Parameter5: "1",
+                                        		RequestBody: undefined
+                                        	});
+                                        
+                                        	dataJSON.Data.forEach(data => {
+                                        		let propertyName = data.TagName.split(THING_DELIMITER)[1].trim();
+                                        		const dataItem = data;
+                                        		dataItem.Samples.forEach(sample => {
+                                        			let dt = parseDateISO(sample.TimeStamp);
+                                        			if (dt >= startDate && dt <= endDate) {
+                                        				var newRow = {};
+                                        				newRow.timestamp = parseDateISO(sample.TimeStamp);
+                                        				newRow[propertyName] = sample.Value;
+                                        				result.AddRow(newRow);
+                                        			}
+                                        		});
+                                        	});
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="QuerySinglePropertyForCharts">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             dataShapeName=""
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let result = DataShapes["NumberValueStream"].CreateValues();
+                                        
+                                        const THING_DELIMITER = ">";
+                                        
+                                        try {
+                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                            let minimum = Math.min(5000, maxItems).toString();
+                                            let tagName = thingName + THING_DELIMITER + propertyName;
+                                        	let dataJSON = Things[manager].ExecuteRequest({
+                                        		Parameter2: startDate.toISOString(),
+                                        		Parameter1: tagName,
+                                                Parameter4: minimum,
+                                        		Parameter3: endDate.toISOString(),
+                                        		Parameter6: undefined,
+                                        		RequestDisplayName: "Get raw data",
+                                        		Parameter5: "1",
+                                        		RequestBody: undefined
+                                        	});
+                                        
+                                        	const dataItem = dataJSON.Data[0];
+                                        	dataItem.Samples.forEach(sample => {
+                                        		let dt = parseDateISO(sample.TimeStamp);
+                                        		if (dt >= startDate && dt <= endDate) {
+                                        			result.AddRow({
+                                        				value: sample.Value, // NUMBER
+                                        				timestamp: parseDateISO(sample.TimeStamp) //DATETIME
+                                        			});
+                                        		}
+                                        	});
+                                        } catch (err) {
+                                        	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                        	throw ("An error has occurred. Please check the script logs for more details.");
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ImplementedShapes>
+                <ImplementedShape
+                 name="PTC.Charts.Provider_TS"
+                 type="ThingShape"></ImplementedShape>
+            </ImplementedShapes>
+            <ThingProperties></ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

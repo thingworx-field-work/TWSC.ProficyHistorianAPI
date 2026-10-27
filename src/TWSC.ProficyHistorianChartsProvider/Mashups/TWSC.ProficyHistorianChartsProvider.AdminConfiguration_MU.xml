@@ -1,0 +1,1335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ majorVersion="9"
+ minorVersion="7"
+ universal="password">
+    <Mashups>
+        <Mashup
+         aspect.isFlex="true"
+         aspect.isResponsive="true"
+         aspect.mashupType="mashup"
+         columns="0.0"
+         description="Proficy Historian REST API Configuration Mashup"
+         documentationContent=""
+         homeMashup=""
+         name="TWSC.ProficyHistorianChartsProvider.AdminConfiguration_MU"
+         projectName="TWSC.ProficyHistorianChartsProvider"
+         rows="0.0"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 dataShapeName=""
+                 description="Mashup Mobile Settings"
+                 isHidden="true"
+                 isMultiRow="false"
+                 name="MobileSettings"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             aspect.friendlyName="Disable Zoom"
+                             baseType="BOOLEAN"
+                             description="Disables zooming in and out within the mashup"
+                             name="disableZoom"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="true"
+                             aspect.friendlyName="Full Screen Mode"
+                             baseType="BOOLEAN"
+                             description="Open the mashup in full screen mode"
+                             name="fullScreenMode"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Height"
+                             baseType="STRING"
+                             description="The height of the mashup page"
+                             name="height"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-height"
+                             aspect.friendlyName="Height Type"
+                             baseType="STRING"
+                             description="Use the height of the device display, or a custom height (in px)"
+                             name="heightType"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="1.0"
+                             aspect.friendlyName="Initial Scale"
+                             baseType="NUMBER"
+                             description="The initial zoom scale when the mashup is loaded for the first time"
+                             name="initialScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Shortcut Icon Title"
+                             baseType="STRING"
+                             description="A title for the mashup shortcut on the iOS home screen"
+                             name="iosShortcutIconTitle"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="black-translucent"
+                             aspect.friendlyName="Status Bar Appearance"
+                             baseType="STRING"
+                             description="The style of the iOS status bar"
+                             name="iosStatusBarAppearance"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="10.0"
+                             aspect.friendlyName="Maximum Scale"
+                             baseType="NUMBER"
+                             description="The maximum scale that users can zoom out to"
+                             name="maximumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="0.1"
+                             aspect.friendlyName="Minimum Scale"
+                             baseType="NUMBER"
+                             description="The minimum scale that users can zoom out to"
+                             name="minimumScale"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.friendlyName="Width"
+                             baseType="STRING"
+                             description="The width of the mashup page"
+                             name="width"
+                             ordinal="0"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.defaultValue="device-width"
+                             aspect.friendlyName="Width Type"
+                             baseType="STRING"
+                             description="Use the width of the device display, or a custom width (in px)"
+                             name="widthType"
+                             ordinal="0"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <disableZoom>false</disableZoom>
+                            <fullScreenMode>true</fullScreenMode>
+                            <height></height>
+                            <heightType>
+                            <![CDATA[
+                            device-height
+                            ]]>
+                            </heightType>
+                            <initialScale>1.0</initialScale>
+                            <iosShortcutIconTitle></iosShortcutIconTitle>
+                            <iosStatusBarAppearance>
+                            <![CDATA[
+                            black-translucent
+                            ]]>
+                            </iosStatusBarAppearance>
+                            <maximumScale>10.0</maximumScale>
+                            <minimumScale>0.1</minimumScale>
+                            <width></width>
+                            <widthType>
+                            <![CDATA[
+                            device-width
+                            ]]>
+                            </widthType>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ParameterDefinitions></ParameterDefinitions>
+            <Things></Things>
+            <ThingShapes></ThingShapes>
+            <ThingTemplates></ThingTemplates>
+            <mashupContent>
+            <![CDATA[
+            {
+              "CustomMashupCss" : "/*Styled Grid*/\n.StyledGrid .widget-gridadvanced[themable] .objbox table.obj tbody tr td {\n    border-left: none !important;\n\tborder-right: none !important;\n    border-top: none !important;\n}\n\n.StyledGrid .widget-gridadvanced>.gridbox_material>.objbox>table>tbody>tr>td.grid_hover {\n        border-bottom:1px solid #E2E2E1 !important;\n    }\n\n\n\n/*Check Box Checkmark*/\nptcs-checkbox:not([disabled])[checked]::part(check-mark){\n\tfill: white !important;\n}\n\nptcs-checkbox:not([disabled])[checked]::part(box){\n\tfill: white !important;\n}\n\nptcs-checkbox:not([partial])[checked]::part(check-mark):hover{\n\tfill: white !important;\n}\n\nptcs-checkbox[disabled]:not([checked])::part(box){\n    background: #F5F5F5 !important;\n}\n\n/*\nptcs-checkbox:not([partial])::part(check-mark):hover{\n\tfill: white !important;\n}*/\n\n",
+              "Data" : {
+                "Session" : {
+                  "DataName" : "Session",
+                  "EntityName" : "",
+                  "EntityType" : "Session",
+                  "Id" : "session",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "SessionInterface",
+                    "Name" : "GetGlobalSessionValues",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetGlobalSessionValues"
+                  } ]
+                },
+                "Things_TWSC.ProficyHistorianAPI.EntryPoint" : {
+                  "DataName" : "Things_TWSC.ProficyHistorianAPI.EntryPoint",
+                  "EntityName" : "TWSC.ProficyHistorianAPI.EntryPoint",
+                  "EntityType" : "Things",
+                  "Id" : "99654110-01c9-4735-b7d7-46b44594f5c7",
+                  "RefreshInterval" : 0,
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "49d1d6e8-8769-4d17-abff-4479ca477bde",
+                    "Name" : "GetConfiguredComponentManager",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetConfiguredComponentManager"
+                  } ]
+                },
+                "UserExtensions" : {
+                  "DataName" : "UserExtensions",
+                  "EntityName" : "",
+                  "EntityType" : "UserExtensions",
+                  "Id" : "UserExtensions",
+                  "Services" : [ {
+                    "APIMethod" : "post",
+                    "Characteristic" : "Services",
+                    "Id" : "UserExtensionInterface",
+                    "Name" : "GetCurrentUserExtensionProperties",
+                    "Parameters" : { },
+                    "RefreshInterval" : 0,
+                    "Target" : "GetCurrentUserExtensionProperties"
+                  } ]
+                }
+              },
+              "DataBindings" : [ {
+                "Id" : "c0b6c4b4-c4eb-4d52-bfff-09e53d313e8f",
+                "PropertyMaps" : [ {
+                  "SourceProperty" : "result",
+                  "SourcePropertyBaseType" : "THINGNAME",
+                  "SourcePropertyType" : "Field",
+                  "TargetProperty" : "ManagerName",
+                  "TargetPropertyBaseType" : "STRING",
+                  "TargetPropertyType" : "property"
+                } ],
+                "SourceArea" : "Data",
+                "SourceDetails" : "AllData",
+                "SourceId" : "GetConfiguredComponentManager",
+                "SourceSection" : "Things_TWSC.ProficyHistorianAPI.EntryPoint",
+                "TargetArea" : "UI",
+                "TargetId" : "mashupcontainer-228",
+                "TargetSection" : ""
+              } ],
+              "DesignTimePermissions" : {
+                "Create" : [ ],
+                "Delete" : [ ],
+                "Metadata" : [ ],
+                "Read" : [ ],
+                "Update" : [ ]
+              },
+              "Events" : [ {
+                "EventHandlerArea" : "Data",
+                "EventHandlerId" : "Things_TWSC.ProficyHistorianAPI.EntryPoint",
+                "EventHandlerService" : "GetConfiguredComponentManager",
+                "EventTriggerArea" : "Mashup",
+                "EventTriggerEvent" : "Loaded",
+                "EventTriggerId" : "mashup-root",
+                "EventTriggerSection" : "",
+                "Id" : "5881bae1-f068-4935-aaab-fcae95a69e02"
+              } ],
+              "Reminders" : [ ],
+              "RunTimePermissions" : {
+                "permissions" : [ ]
+              },
+              "UI" : {
+                "Properties" : {
+                  "AddToDashboardButton" : "SimplePlus",
+                  "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+                  "Area" : "Mashup",
+                  "BGImage" : "",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "Columns" : 0,
+                  "ConfigureGadgetButton" : "SimpleGear",
+                  "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+                  "DisableLegacyCustomClassStyles" : false,
+                  "DisplayName" : "Mashup",
+                  "EnableParameterEditing" : false,
+                  "Height" : 618,
+                  "Id" : "mashup-root",
+                  "IgnoreWarningsInViewMashup" : false,
+                  "IsPrintLayout" : false,
+                  "Left" : 0,
+                  "LegacyFocus" : true,
+                  "Margin" : "5",
+                  "MashupToEditGadget" : "DefaultMashupToEditGadget",
+                  "Master" : "PTCTS.UserInterface.Master_MM",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "ResponsiveLayout" : true,
+                  "Rows" : 0,
+                  "ShowDataLoading" : false,
+                  "Style" : "DefaultMashupStyle",
+                  "StyleProperties" : {
+                    "data" : {
+                      "flexcontainer-111" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-117" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#D0D0CF"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-118" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#D0D0CF"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-119" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "padding-left" : "25px",
+                              "padding-top" : "25px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-127" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#E1E1E1"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-140" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "padding-bottom" : "",
+                              "padding-top" : ""
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-141" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "rgba(191,48,48,1)"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-145" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "padding-left" : "25px",
+                              "padding-top" : "25px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-147" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#E2E2E1"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-148" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-151" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "rgba(51,153,255,1)"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-152" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-153" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-156" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-163" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "padding-bottom" : "",
+                              "padding-left" : "",
+                              "padding-right" : "",
+                              "padding-top" : ""
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-167" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "padding-bottom" : "25px",
+                              "padding-left" : "25px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-198" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#e2e2e1"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-27" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#ffffff",
+                              "border-radius" : "0px",
+                              "border-style" : "none",
+                              "border-width" : "0px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-3" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "#E2E2E1"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-4" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "rgba(255,255,255,1)",
+                              "padding-left" : "27px",
+                              "padding-right" : "",
+                              "padding-top" : "20px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-51" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit",
+                              "padding-bottom" : "25px"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-52" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-66" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "rgba(247,247,247,1)"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-67" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "flexcontainer-95" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "flex-container"
+                      },
+                      "ptcsbutton-97" : {
+                        "parts" : {
+                          "$" : {
+                            "$" : {
+                              "background" : "rgba(255,255,255,1)",
+                              "border-color" : "inherit"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-button"
+                      },
+                      "ptcscheckbox-181" : {
+                        "parts" : {
+                          "box" : {
+                            "disabled+unselected" : {
+                              "background" : "#F5F5F5",
+                              "border-color" : "#C8C9C7"
+                            }
+                          },
+                          "check-mark" : {
+                            "hover" : {
+                              "fill" : "rgba(255,255,255,0)"
+                            },
+                            "hover+selected" : {
+                              "fill" : "rgba(255,255,255,1)"
+                            },
+                            "pressed" : {
+                              "fill" : "rgba(255,255,255,1)"
+                            },
+                            "pressed+selected" : {
+                              "fill" : "rgba(255,255,255,1)"
+                            },
+                            "selected" : {
+                              "fill" : "rgba(255,255,255,1)"
+                            }
+                          },
+                          "label" : {
+                            "disabled+unselected" : {
+                              "color" : "#C8C9C7"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-checkbox"
+                      },
+                      "ptcsdropdown-53" : {
+                        "parts" : {
+                          "icon" : {
+                            "$" : {
+                              "color" : "#A3A3A3"
+                            }
+                          },
+                          "select-box" : {
+                            "pressed" : {
+                              "border-color" : "#5BB73B",
+                              "border-style" : "solid",
+                              "border-width" : "2px"
+                            },
+                            "selected" : {
+                              "border-color" : "#5BB73B",
+                              "border-style" : "solid",
+                              "border-width" : "2px"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-dropdown"
+                      },
+                      "ptcsdropdown-54" : {
+                        "parts" : {
+                          "icon" : {
+                            "disabled" : {
+                              "color" : "#C8C9C7"
+                            }
+                          },
+                          "item-value" : {
+                            "disabled" : {
+                              "color" : "#C8C9C7"
+                            }
+                          },
+                          "select-box" : {
+                            "$" : {
+                              "border-color" : "#C8C9C7",
+                              "border-radius" : "4px"
+                            },
+                            "disabled" : {
+                              "background" : "#F5F5F5"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-dropdown"
+                      },
+                      "ptcstextarea-204" : {
+                        "parts" : {
+                          "text-box" : {
+                            "pressed" : {
+                              "border-color" : "#5BB73B",
+                              "border-width" : "2px"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-textarea"
+                      },
+                      "ptcstextarea-205" : {
+                        "parts" : {
+                          "hint-text" : {
+                            "disabled" : {
+                              "color" : "#C8C9C7"
+                            }
+                          },
+                          "text-box" : {
+                            "pressed" : {
+                              "border-color" : "#5BB73B",
+                              "border-width" : "2px"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-textarea"
+                      },
+                      "ptcstextfield-182" : {
+                        "parts" : {
+                          "text-box" : {
+                            "disabled" : {
+                              "background" : "inherit"
+                            },
+                            "disabled+focus" : {
+                              "border-color" : "inherit"
+                            },
+                            "focus" : {
+                              "border-color" : "#5BB73B",
+                              "border-width" : "2px"
+                            },
+                            "pressed" : {
+                              "border-color" : "#5BB73B",
+                              "border-style" : "solid",
+                              "border-width" : "2px"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-textfield"
+                      },
+                      "ptcstextfield-191" : {
+                        "parts" : {
+                          "$" : {
+                            "disabled" : {
+                              "color" : "inherit"
+                            }
+                          },
+                          "counter" : {
+                            "disabled" : {
+                              "font-weight" : "400"
+                            }
+                          },
+                          "hint-text" : {
+                            "disabled" : {
+                              "color" : "#C8C9C7",
+                              "font-weight" : "400"
+                            }
+                          },
+                          "text-box" : {
+                            "disabled+focus" : {
+                              "border-color" : "#E2E2E1",
+                              "border-width" : "1px"
+                            }
+                          },
+                          "text-value" : {
+                            "disabled" : {
+                              "color" : "inherit",
+                              "font-weight" : "400"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-textfield"
+                      },
+                      "ptcstextfield-29" : {
+                        "parts" : {
+                          "text-box" : {
+                            "hover" : {
+                              "border-color" : "#3D4647"
+                            },
+                            "pressed" : {
+                              "border-color" : "#3D4647"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-textfield"
+                      },
+                      "ptcstogglebutton-160" : {
+                        "parts" : {
+                          "label" : {
+                            "$" : {
+                              "font-weight" : "400"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-toggle-button"
+                      },
+                      "ptcstogglebutton-195" : {
+                        "parts" : {
+                          "label" : {
+                            "$" : {
+                              "font-weight" : "400"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-toggle-button"
+                      },
+                      "ptcstogglebutton-196" : {
+                        "parts" : {
+                          "label" : {
+                            "$" : {
+                              "font-weight" : "400"
+                            }
+                          },
+                          "oval" : {
+                            "disabled" : {
+                              "background" : "#E2E2E1",
+                              "border-color" : "#E2E2E1"
+                            }
+                          },
+                          "rectangle" : {
+                            "disabled" : {
+                              "background" : "#F5F5F5",
+                              "border-color" : "#E2E2E1"
+                            }
+                          }
+                        },
+                        "widget" : "ptcs-toggle-button"
+                      }
+                    },
+                    "meta" : {
+                      "type" : "WidgetStyler",
+                      "version" : "1.0"
+                    }
+                  },
+                  "StyleTheme" : "PTCTS.UserInterface.Default_TH",
+                  "Title" : "",
+                  "TitleBar" : false,
+                  "TitleBarStyle" : "DefaultTitleBarStyle",
+                  "TitleBarText" : "Gadget Title Here",
+                  "Top" : 0,
+                  "Type" : "mashup",
+                  "UseMasterTheme" : false,
+                  "UseTheme" : false,
+                  "UseThemeForHybrids" : false,
+                  "Visible" : true,
+                  "Width" : 1024,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Mashup",
+                  "_currentParameterDefs" : [ ],
+                  "id_index" : 234,
+                  "supportsAutoResize" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "CollapseTabIcon" : "",
+                    "DisableLegacyCustomClassStyles" : false,
+                    "DisplayName" : "container-2",
+                    "EnableContainerUnload" : false,
+                    "EnableExpandCollapse" : false,
+                    "ExpandCollapseTabLocation" : "inside",
+                    "ExpandTabIcon" : "",
+                    "Expanded" : true,
+                    "Id" : "flexcontainer-2",
+                    "LastContainer" : true,
+                    "LazyLoading" : false,
+                    "Margin" : "",
+                    "Overlay" : false,
+                    "OverrideChildrenAbsolute" : false,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "ShowExpandCollapseTab" : false,
+                    "ShowVerticalScrollbar" : false,
+                    "SourceURL" : "",
+                    "Style" : "DefaultContainerStyle",
+                    "StyleProperties" : { },
+                    "Type" : "flexcontainer",
+                    "UseTheme" : true,
+                    "Visible" : true,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Responsive Container",
+                    "align-content" : "flex-start",
+                    "align-items" : "flex-start",
+                    "flex-basis" : "auto",
+                    "flex-direction" : "row",
+                    "flex-grow" : "1",
+                    "flex-max-height" : "",
+                    "flex-max-width" : "",
+                    "flex-min-height" : "",
+                    "flex-min-width" : "",
+                    "flex-shrink" : "1",
+                    "flex-size" : "default",
+                    "flex-wrap" : "nowrap",
+                    "iconClass" : "widgets-flexcontainer",
+                    "isLocked" : true,
+                    "justify-content" : "flex-start",
+                    "positioning" : "responsive",
+                    "userCannotRemove" : true
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "CollapseTabIcon" : "",
+                      "DisableLegacyCustomClassStyles" : false,
+                      "DisplayName" : "container-3",
+                      "EnableContainerUnload" : false,
+                      "EnableExpandCollapse" : false,
+                      "ExpandCollapseTabLocation" : "inside",
+                      "ExpandTabIcon" : "",
+                      "Expanded" : true,
+                      "Id" : "flexcontainer-3",
+                      "LastContainer" : false,
+                      "LazyLoading" : false,
+                      "Margin" : "",
+                      "Overlay" : false,
+                      "OverrideChildrenAbsolute" : false,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "ShowVerticalScrollbar" : false,
+                      "SourceURL" : "",
+                      "Style" : "DefaultContainerStyle",
+                      "StyleProperties" : { },
+                      "Type" : "flexcontainer",
+                      "UseTheme" : true,
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Responsive Container",
+                      "align-content" : "flex-start",
+                      "align-items" : "flex-start",
+                      "flex-basis" : "auto",
+                      "flex-direction" : "row",
+                      "flex-grow" : "1",
+                      "flex-max-height" : "",
+                      "flex-max-width" : "1px",
+                      "flex-min-height" : "",
+                      "flex-min-width" : "1px",
+                      "flex-shrink" : "1",
+                      "flex-size" : "fixed",
+                      "flex-wrap" : "nowrap",
+                      "iconClass" : "widgets-flexcontainer-fixed",
+                      "isLocked" : false,
+                      "justify-content" : "flex-start",
+                      "positioning" : "responsive",
+                      "userCannotRemove" : false
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "CollapseTabIcon" : "",
+                      "DisableLegacyCustomClassStyles" : false,
+                      "DisplayName" : "container-15",
+                      "EnableContainerUnload" : false,
+                      "EnableExpandCollapse" : false,
+                      "ExpandCollapseTabLocation" : "inside",
+                      "ExpandTabIcon" : "",
+                      "Expanded" : true,
+                      "Id" : "flexcontainer-15",
+                      "LastContainer" : true,
+                      "LazyLoading" : false,
+                      "Margin" : "",
+                      "Overlay" : false,
+                      "OverrideChildrenAbsolute" : false,
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "ShowVerticalScrollbar" : false,
+                      "SourceURL" : "",
+                      "Style" : "DefaultContainerStyle",
+                      "StyleProperties" : { },
+                      "Type" : "flexcontainer",
+                      "UseTheme" : true,
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Responsive Container",
+                      "align-content" : "flex-start",
+                      "align-items" : "flex-start",
+                      "flex-basis" : "auto",
+                      "flex-direction" : "column",
+                      "flex-grow" : "1",
+                      "flex-max-height" : "",
+                      "flex-max-width" : "",
+                      "flex-min-height" : "",
+                      "flex-min-width" : "",
+                      "flex-shrink" : "1",
+                      "flex-size" : "default",
+                      "flex-wrap" : "nowrap",
+                      "iconClass" : "widgets-flexcontainer",
+                      "isLocked" : true,
+                      "justify-content" : "flex-start",
+                      "positioning" : "responsive",
+                      "userCannotRemove" : false
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "CollapseTabIcon" : "",
+                        "DisableLegacyCustomClassStyles" : false,
+                        "DisplayName" : "Header",
+                        "EnableContainerUnload" : false,
+                        "EnableExpandCollapse" : false,
+                        "ExpandCollapseTabLocation" : "inside",
+                        "ExpandTabIcon" : "",
+                        "Expanded" : true,
+                        "Id" : "flexcontainer-119",
+                        "LastContainer" : false,
+                        "LazyLoading" : false,
+                        "Margin" : "",
+                        "Overlay" : false,
+                        "OverrideChildrenAbsolute" : false,
+                        "ResponsiveLayout" : false,
+                        "ShowDataLoading" : true,
+                        "ShowExpandCollapseTab" : false,
+                        "ShowVerticalScrollbar" : false,
+                        "SourceURL" : "",
+                        "Style" : "DefaultContainerStyle",
+                        "StyleProperties" : { },
+                        "Type" : "flexcontainer",
+                        "UseTheme" : true,
+                        "Visible" : true,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Responsive Container",
+                        "align-content" : "flex-start",
+                        "align-items" : "flex-start",
+                        "flex-basis" : "auto",
+                        "flex-direction" : "column",
+                        "flex-grow" : 1,
+                        "flex-max-height" : "100px",
+                        "flex-max-width" : "",
+                        "flex-min-height" : "100px",
+                        "flex-min-width" : "",
+                        "flex-shrink" : 1,
+                        "flex-size" : "fixed",
+                        "flex-wrap" : "nowrap",
+                        "iconClass" : "widgets-flexcontainer-fixed",
+                        "isLocked" : false,
+                        "justify-content" : "flex-start",
+                        "positioning" : "responsive",
+                        "userCannotRemove" : false
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisableLegacyCustomClassStyles" : false,
+                          "DisclosureControl" : "show-more",
+                          "DisplayName" : "ptcs-label-226",
+                          "HorizontalAlignment" : "left",
+                          "Id" : "ptcslabel-226",
+                          "LabelText" : "Proficy Historian Configuration",
+                          "LabelType" : "sub-header",
+                          "LastContainer" : false,
+                          "Left" : 237,
+                          "Margin" : "0 0 10 0",
+                          "MultiLine" : true,
+                          "PreserveWhiteSpace" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Top" : 86,
+                          "Type" : "ptcslabel",
+                          "UseTheme" : true,
+                          "VerticalAlignment" : "flex-start",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Label",
+                          "overflowShowLessTxt" : "[[showLess]]",
+                          "overflowShowMoreTxt" : "[[showMore]]"
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "DisableLegacyCustomClassStyles" : false,
+                          "DisclosureControl" : "show-more",
+                          "DisplayName" : "ptcs-label-227",
+                          "HorizontalAlignment" : "left",
+                          "Id" : "ptcslabel-227",
+                          "LabelText" : "Modify configuration data used by Proficy Historian API",
+                          "LabelType" : "body",
+                          "LastContainer" : false,
+                          "Left" : 509,
+                          "Margin" : "0",
+                          "MultiLine" : true,
+                          "PreserveWhiteSpace" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "Top" : 51,
+                          "Type" : "ptcslabel",
+                          "UseTheme" : true,
+                          "VerticalAlignment" : "flex-start",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Label",
+                          "overflowShowLessTxt" : "[[showLess]]",
+                          "overflowShowMoreTxt" : "[[showMore]]"
+                        },
+                        "Widgets" : [ ]
+                      } ]
+                    }, {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "CollapseTabIcon" : "",
+                        "DisableLegacyCustomClassStyles" : false,
+                        "DisplayName" : "container-163",
+                        "EnableContainerUnload" : false,
+                        "EnableExpandCollapse" : false,
+                        "ExpandCollapseTabLocation" : "inside",
+                        "ExpandTabIcon" : "",
+                        "Expanded" : true,
+                        "Id" : "flexcontainer-163",
+                        "LastContainer" : true,
+                        "LazyLoading" : false,
+                        "Margin" : "",
+                        "Overlay" : false,
+                        "OverrideChildrenAbsolute" : false,
+                        "ResponsiveLayout" : false,
+                        "ShowDataLoading" : true,
+                        "ShowExpandCollapseTab" : false,
+                        "ShowVerticalScrollbar" : false,
+                        "SourceURL" : "",
+                        "Style" : "DefaultContainerStyle",
+                        "StyleProperties" : { },
+                        "Type" : "flexcontainer",
+                        "UseTheme" : true,
+                        "Visible" : true,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Responsive Container",
+                        "align-content" : "flex-start",
+                        "align-items" : "flex-start",
+                        "flex-basis" : "auto",
+                        "flex-direction" : "row",
+                        "flex-grow" : 1,
+                        "flex-max-height" : "",
+                        "flex-max-width" : "",
+                        "flex-min-height" : "",
+                        "flex-min-width" : "",
+                        "flex-shrink" : 1,
+                        "flex-size" : "default",
+                        "flex-wrap" : "nowrap",
+                        "iconClass" : "widgets-flexcontainer",
+                        "isLocked" : true,
+                        "justify-content" : "flex-start",
+                        "positioning" : "responsive",
+                        "userCannotRemove" : false
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "CollapseTabIcon" : "",
+                          "DisableLegacyCustomClassStyles" : false,
+                          "DisplayName" : "container-186",
+                          "EnableContainerUnload" : false,
+                          "EnableExpandCollapse" : false,
+                          "ExpandCollapseTabLocation" : "inside",
+                          "ExpandTabIcon" : "",
+                          "Expanded" : true,
+                          "Id" : "flexcontainer-186",
+                          "LastContainer" : false,
+                          "LazyLoading" : false,
+                          "Margin" : "",
+                          "Overlay" : false,
+                          "OverrideChildrenAbsolute" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "ShowVerticalScrollbar" : false,
+                          "SourceURL" : "",
+                          "Style" : "DefaultContainerStyle",
+                          "StyleProperties" : { },
+                          "Type" : "flexcontainer",
+                          "UseTheme" : true,
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Responsive Container",
+                          "align-content" : "flex-start",
+                          "align-items" : "flex-start",
+                          "flex-basis" : "auto",
+                          "flex-direction" : "row",
+                          "flex-grow" : 1,
+                          "flex-max-height" : "",
+                          "flex-max-width" : "25px",
+                          "flex-min-height" : "",
+                          "flex-min-width" : "25px",
+                          "flex-shrink" : 1,
+                          "flex-size" : "fixed",
+                          "flex-wrap" : "nowrap",
+                          "iconClass" : "widgets-flexcontainer-fixed",
+                          "isLocked" : false,
+                          "justify-content" : "flex-start",
+                          "positioning" : "responsive",
+                          "userCannotRemove" : false
+                        },
+                        "Widgets" : [ ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "CollapseTabIcon" : "",
+                          "DisableLegacyCustomClassStyles" : false,
+                          "DisplayName" : "container-185",
+                          "EnableContainerUnload" : false,
+                          "EnableExpandCollapse" : false,
+                          "ExpandCollapseTabLocation" : "inside",
+                          "ExpandTabIcon" : "",
+                          "Expanded" : true,
+                          "Id" : "flexcontainer-185",
+                          "LastContainer" : true,
+                          "LazyLoading" : false,
+                          "Margin" : "",
+                          "Overlay" : false,
+                          "OverrideChildrenAbsolute" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "ShowVerticalScrollbar" : false,
+                          "SourceURL" : "",
+                          "Style" : "DefaultContainerStyle",
+                          "StyleProperties" : { },
+                          "Type" : "flexcontainer",
+                          "UseTheme" : true,
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Responsive Container",
+                          "align-content" : "flex-start",
+                          "align-items" : "flex-start",
+                          "flex-basis" : "auto",
+                          "flex-direction" : "row",
+                          "flex-grow" : 1,
+                          "flex-max-height" : "",
+                          "flex-max-width" : "",
+                          "flex-min-height" : "",
+                          "flex-min-width" : "",
+                          "flex-shrink" : 1,
+                          "flex-size" : "default",
+                          "flex-wrap" : "nowrap",
+                          "iconClass" : "widgets-flexcontainer",
+                          "isLocked" : true,
+                          "justify-content" : "flex-start",
+                          "positioning" : "responsive",
+                          "userCannotRemove" : false
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "ConfigurationAdminThing" : "PTCTS.ConfigurationManagement.Manager",
+                            "ConfigurationTableName" : "",
+                            "DisableLegacyCustomClassStyles" : false,
+                            "DisplayName" : "mashupcontainer-228",
+                            "Height" : 300,
+                            "Id" : "mashupcontainer-228",
+                            "LastContainer" : false,
+                            "Left" : 44,
+                            "ManagerName" : "",
+                            "Margin" : "5",
+                            "MashupParameters" : [ {
+                              "BaseType" : "STRING",
+                              "DefaultValue" : "",
+                              "Description" : "",
+                              "ParameterName" : "ManagerName",
+                              "ParmDef" : {
+                                "aspects" : {
+                                  "bindingDirection" : "IN",
+                                  "isMandatory" : "false"
+                                },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "ManagerName",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "STRING",
+                              "Description" : "",
+                              "ParameterName" : "SelectedConfigurationTableName",
+                              "ParmDef" : {
+                                "aspects" : {
+                                  "bindingDirection" : "BOTH",
+                                  "isMandatory" : "false"
+                                },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "SelectedConfigurationTableName",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "STRING",
+                              "DefaultValue" : "PTCTS.ConfigurationManagement.Manager",
+                              "Description" : "",
+                              "ParameterName" : "ConfigurationAdminThing",
+                              "ParmDef" : {
+                                "aspects" : {
+                                  "bindingDirection" : "IN",
+                                  "isMandatory" : "false"
+                                },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "ConfigurationAdminThing",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "JSON",
+                              "Description" : "",
+                              "ParameterName" : "inputParameters",
+                              "ParmDef" : {
+                                "aspects" : {
+                                  "bindingDirection" : "IN",
+                                  "isMandatory" : "false"
+                                },
+                                "baseType" : "JSON",
+                                "description" : "",
+                                "name" : "inputParameters",
+                                "ordinal" : 0
+                              }
+                            }, {
+                              "BaseType" : "STRING",
+                              "Description" : "",
+                              "ParameterName" : "ModifiedConfigurationTableName",
+                              "ParmDef" : {
+                                "aspects" : {
+                                  "bindingDirection" : "BOTH",
+                                  "isMandatory" : "false"
+                                },
+                                "baseType" : "STRING",
+                                "description" : "",
+                                "name" : "ModifiedConfigurationTableName",
+                                "ordinal" : 0
+                              }
+                            } ],
+                            "Name" : "PTCTS.ConfigurationManagementUI.ConfigurationTableAdministration_MU",
+                            "ResponsiveLayout" : true,
+                            "ShowDataLoading" : true,
+                            "TabSequenceGroup" : 0,
+                            "Top" : 66,
+                            "Type" : "mashupcontainer",
+                            "Visible" : true,
+                            "Width" : 400,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Contained Mashup"
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "Area" : "UI",
+                          "CollapseTabIcon" : "",
+                          "DisableLegacyCustomClassStyles" : false,
+                          "DisplayName" : "container-187",
+                          "EnableContainerUnload" : false,
+                          "EnableExpandCollapse" : false,
+                          "ExpandCollapseTabLocation" : "inside",
+                          "ExpandTabIcon" : "",
+                          "Expanded" : true,
+                          "Id" : "flexcontainer-187",
+                          "LastContainer" : false,
+                          "LazyLoading" : false,
+                          "Margin" : "",
+                          "Overlay" : false,
+                          "OverrideChildrenAbsolute" : false,
+                          "ResponsiveLayout" : false,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "ShowVerticalScrollbar" : false,
+                          "SourceURL" : "",
+                          "Style" : "DefaultContainerStyle",
+                          "StyleProperties" : { },
+                          "Type" : "flexcontainer",
+                          "UseTheme" : true,
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Responsive Container",
+                          "align-content" : "flex-start",
+                          "align-items" : "flex-start",
+                          "flex-basis" : "auto",
+                          "flex-direction" : "row",
+                          "flex-grow" : 1,
+                          "flex-max-height" : "",
+                          "flex-max-width" : "25px",
+                          "flex-min-height" : "",
+                          "flex-min-width" : "25px",
+                          "flex-shrink" : 1,
+                          "flex-size" : "fixed",
+                          "flex-wrap" : "nowrap",
+                          "iconClass" : "widgets-flexcontainer-fixed",
+                          "isLocked" : false,
+                          "justify-content" : "flex-start",
+                          "positioning" : "responsive",
+                          "userCannotRemove" : false
+                        },
+                        "Widgets" : [ ]
+                      } ]
+                    } ]
+                  } ]
+                } ]
+              },
+              "mashupType" : "mashup"
+            }
+            ]]>
+            </mashupContent>
+            <preview></preview>
+        </Mashup>
+    </Mashups>
+</Entities>
