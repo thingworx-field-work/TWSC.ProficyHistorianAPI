@@ -15,6 +15,8 @@ The Building Block includes:
 
 Also refer to the [included presentation](<docs/ThingWorx Proficy Historian API BB.pdf>) for a brief overview. 
 
+**IMPORTANT**: Do not install from the source code in this repository. Install *only* from the published extensions in the [releases](https://github.com/thingworx-field-work/TWSC.ProficyHistorianAPI/releases).
+
 ## Prerequisites
 Before importing this Building Block, the following components must already be installed and configured:
 - ThingWorx Foundation 9.7 (or above)
@@ -24,6 +26,8 @@ Before importing this Building Block, the following components must already be i
     - OAuth authentication enabled
     - A service account with API read permissions
     - Historian tags available through the REST API
+
+If installing the *optional* SCPA Charts Provider Building Block, SCPA 2.0.7 or higher must be installed and configured first.
 
 ## Historian Tag Naming Convention
 This proof of concept assumes Historian tags follow the naming pattern:
