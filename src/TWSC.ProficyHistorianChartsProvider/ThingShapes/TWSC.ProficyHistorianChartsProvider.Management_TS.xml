@@ -14,10 +14,280 @@
          projectName="TWSC.ProficyHistorianChartsProvider"
          tags="">
             <PropertyDefinitions></PropertyDefinitions>
-            <ServiceDefinitions></ServiceDefinitions>
+            <ServiceDefinitions>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetHistorianTagName">
+                    <ResultType
+                     aspect.dataShape="TWSC.ProficyHistorianChartsProvider.PropertyTagMapConfiguration_DS"
+                     baseType="STRING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description=""
+                         name="propertyName"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="THINGNAME"
+                         description=""
+                         name="thingName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="GetMappedProperties">
+                    <ResultType
+                     aspect.dataShape="TWSC.ProficyHistorianChartsProvider.ProficyHistorianTagConfiguration_DS"
+                     baseType="INFOTABLE"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="THINGNAME"
+                         description=""
+                         name="thingName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+                <ServiceDefinition
+                 aspect.isAsync="false"
+                 category=""
+                 description=""
+                 isAllowOverride="true"
+                 isLocalOnly="false"
+                 isOpen="false"
+                 isPrivate="false"
+                 name="UpdatePropertyTagMapping">
+                    <ResultType
+                     baseType="NOTHING"
+                     description=""
+                     name="result"
+                     ordinal="0"></ResultType>
+                    <ParameterDefinitions>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description="Proficy Historian Tag Name"
+                         name="historianTag"
+                         ordinal="3"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="STRING"
+                         description="ThingWorx Property Name"
+                         name="propertyName"
+                         ordinal="2"></FieldDefinition>
+                        <FieldDefinition
+                         aspect.isRequired="true"
+                         baseType="THINGNAME"
+                         description=""
+                         name="thingName"
+                         ordinal="1"></FieldDefinition>
+                    </ParameterDefinitions>
+                </ServiceDefinition>
+            </ServiceDefinitions>
             <EventDefinitions></EventDefinitions>
             <ServiceMappings></ServiceMappings>
-            <ServiceImplementations></ServiceImplementations>
+            <ServiceImplementations>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetHistorianTagName">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    let result = "";
+                                    
+                                    try {
+                                    	if (thingName && Things[thingName]) {
+                                            const configurationTableName = "ProficyHistorianTagConfiguration";
+                                    		const mmEntryPoint = "PTC.ModelManagement.EntryPoint";
+                                    		const mmManager = Things[mmEntryPoint].GetConfiguredComponentManager();
+                                    		
+                                    		let configTable = Things[mmManager].GetThingHierarchyConfigurationData({
+                                    			ignoreThingShapes: false /* BOOLEAN {"defaultValue":false} */ ,
+                                    			configurationTableName: configurationTableName /* STRING */ ,
+                                    			thingName: thingName /* THINGNAME */
+                                    		});
+                                    		const matchingRow = configTable.Find({
+                                    			PropertyName: propertyName
+                                    		});
+                                    
+                                    		// if there's a config table row for this, return that historian tag, otherwise use the fallback pattern
+                                    		result = matchingRow ? matchingRow.HistorianTag : thingName + ">" + propertyName;
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="GetMappedProperties">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    var result = DataShapes["TWSC.ProficyHistorianChartsProvider.ProficyHistorianTagConfiguration_DS"].CreateValues();
+                                    
+                                    try {
+                                    	if (thingName && Things[thingName]) {
+                                    		const configurationTableName = "ProficyHistorianTagConfiguration";
+                                    		const mmEntryPoint = "PTC.ModelManagement.EntryPoint";
+                                    		const mmManager = Things[mmEntryPoint].GetConfiguredComponentManager();
+                                    
+                                    		result = Things[mmManager].GetThingHierarchyConfigurationData({
+                                    			ignoreThingShapes: false /* BOOLEAN {"defaultValue":false} */ ,
+                                    			configurationTableName: configurationTableName /* STRING */ ,
+                                    			thingName: thingName /* THINGNAME */
+                                    		});
+                                    	}
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+                <ServiceImplementation
+                 description=""
+                 handlerName="Script"
+                 name="UpdatePropertyTagMapping">
+                    <ConfigurationTables>
+                        <ConfigurationTable
+                         dataShapeName=""
+                         description=""
+                         isMultiRow="false"
+                         name="Script"
+                         ordinal="0">
+                            <DataShape>
+                                <FieldDefinitions>
+                                    <FieldDefinition
+                                     baseType="STRING"
+                                     description="code"
+                                     name="code"
+                                     ordinal="0"></FieldDefinition>
+                                </FieldDefinitions>
+                            </DataShape>
+                            <Rows>
+                                <Row>
+                                    <code>
+                                    <![CDATA[
+                                    try {
+                                        const mmEntry = "PTC.ModelManagement.EntryPoint";
+                                    	const modelManager = Things[mmEntry].GetConfiguredComponentManager();
+                                    	let configurationTableName = "ProficyHistorianTagConfiguration";
+                                    
+                                    	var configuration = Things[modelManager].GetConfigurationTableForEntity({
+                                    		isMultiRow: true /* BOOLEAN */ ,
+                                    		entityName: thingName /* STRING */ ,
+                                    		entityType: "Thing" /* STRING */ ,
+                                    		configurationTableName: configurationTableName /* STRING */ ,
+                                    		dataShapeName: "TWSC.ProficyHistorianChartsProvider.ProficyHistorianTagConfiguration_DS" /* STRING */ ,
+                                    		autoCreate: true
+                                    	});
+                                    
+                                    	var propertyFound = false;
+                                    	if (propertyName) {
+                                    		for (var i = 0; i < configuration.length; i++) {
+                                    			if (configuration[i].PropertyName === propertyName) {
+                                    				configuration[i].HistorianTag = historianTag;
+                                    				propertyFound = true;
+                                    			}
+                                    		}
+                                    	}
+                                    
+                                    	configurationTableName = Things[modelManager].GetConfigurationTableName({
+                                    		entityName: thingName,
+                                    		configurationTableName: configurationTableName
+                                    	});
+                                    	if (!propertyFound) {
+                                    		configuration.AddRow({
+                                    			"PropertyName": propertyName,
+                                    			"HistorianTag": historianTag
+                                    		});
+                                    	}
+                                    
+                                    	Things[thingName].SetMultiRowConfigurationTable({
+                                    		configurationTable: configuration /* INFOTABLE */ ,
+                                    		persistent: true /* BOOLEAN */ ,
+                                    		tableName: configurationTableName /* STRING */
+                                    	});
+                                    } catch (err) {
+                                    	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
+                                    	throw ("An error has occurred. Please check the script logs for more details.");
+                                    }
+                                    ]]>
+                                    </code>
+                                </Row>
+                            </Rows>
+                        </ConfigurationTable>
+                    </ConfigurationTables>
+                </ServiceImplementation>
+            </ServiceImplementations>
             <Subscriptions></Subscriptions>
             <avatar></avatar>
             <DesignTimePermissions>

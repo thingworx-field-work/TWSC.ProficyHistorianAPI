@@ -66,28 +66,47 @@
                                         // for an example of how this service works with ThingWorx
                                         let result = DataShapes["GenericStringList"].CreateValues();
                                         
-                                        const THING_DELIMITER = ">";
-                                        
                                         try {
-                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
-                                        	let tagsJSON = Things[manager].ExecuteRequest({
-                                        		Parameter2: 10000 /* STRING */ ,
-                                        		Parameter1: entityName + THING_DELIMITER + "*",
-                                        		Parameter4: undefined /* STRING */ ,
-                                        		Parameter3: undefined /* STRING */ ,
-                                        		Parameter6: undefined /* STRING */ ,
-                                        		RequestDisplayName: "Get tags with name mask",
-                                        		Parameter5: undefined /* STRING */ ,
-                                        		RequestBody: undefined
-                                        	});
-                                        	let obj = Object();
-                                        	tagsJSON.Tags.forEach(item => {
-                                        		const [thingName, property] = item.split(THING_DELIMITER);
-                                        		if (entityName == thingName && property.length > 0) {
-                                        			obj.item = property;
-                                        			result.AddRow(obj);
-                                        		}
-                                        	});
+                                            // see if there are any mapped properties in the Thing config before using the default behavior for querying tags
+                                            let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                            
+                                            let mappedTags = Things[mgr].GetMappedProperties({thingName: entityName});
+                                            if (mappedTags && mappedTags.rows && mappedTags.rows.length > 0) {
+                                            	const propertyDefinitions = Things[entityName].GetPropertyDefinitions();
+                                            	const existingPropertyNames = propertyDefinitions.rows.toArray()
+                                                	.map(property => property.name);
+                                        
+                                            	mappedTags.rows.toArray().forEach(mapRow => {
+                                                	if (mapRow.PropertyName && existingPropertyNames.indexOf(mapRow.PropertyName) !== -1) {
+                                                    	result.AddRow({
+                                                        	item: mapRow.PropertyName
+                                                    	});
+                                                	}
+                                            	});
+                                            } else {
+                                                const THING_DELIMITER = ">";
+                                                
+                                                let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                                let tagsJSON = Things[apiMgr].ExecuteRequest({
+                                                    Parameter2: 10000 /* STRING */ ,
+                                                    Parameter1: entityName + THING_DELIMITER + "*",
+                                                    Parameter4: undefined /* STRING */ ,
+                                                    Parameter3: undefined /* STRING */ ,
+                                                    Parameter6: undefined /* STRING */ ,
+                                                    RequestDisplayName: "Get tags with name mask",
+                                                    Parameter5: undefined /* STRING */ ,
+                                                    RequestBody: undefined
+                                                });
+                                                let obj = Object();
+                                                tagsJSON.Tags.forEach(item => {
+                                                    const [thingName, property] = item.split(THING_DELIMITER);
+                                                    if (entityName == thingName && property.length > 0) {
+                                                        obj.item = property;
+                                                        result.AddRow(obj);
+                                                    }
+                                                });
+                                                
+                                            }
                                         } catch (err) {
                                         	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
                                         	throw ("An error has occurred. Please check the script logs for more details.");
@@ -130,45 +149,86 @@
                                         const THING_DELIMITER = ">";
                                         
                                         try {
-                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
-                                        	let tagsJSON = Things[manager].ExecuteRequest({
-                                        		Parameter2: 10000 /* STRING */ ,
-                                        		Parameter1: thingName + THING_DELIMITER + "*",
-                                        		Parameter4: undefined /* STRING */ ,
-                                        		Parameter3: undefined /* STRING */ ,
-                                        		Parameter6: undefined /* STRING */ ,
-                                        		RequestDisplayName: "Get tags with name mask",
-                                        		Parameter5: undefined /* STRING */ ,
-                                        		RequestBody: undefined
-                                        	});
+                                        	let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
                                         
-                                        	tagsJSON.Tags.forEach(item => {
-                                        		const [myThingName, property] = item.split(THING_DELIMITER);
-                                        		if (thingName == myThingName && property.length > 0) {
-                                        			let tagName = thingName + THING_DELIMITER + property;
-                                        			let tagJSON = Things[manager].ExecuteRequest({
-                                        				Parameter2: undefined,
-                                        				Parameter1: tagName,
-                                        				Parameter4: undefined,
-                                        				Parameter3: undefined,
-                                        				Parameter6: undefined,
-                                        				RequestDisplayName: "Get tag properties",
-                                        				Parameter5: undefined,
-                                        				RequestBody: undefined
-                                        			});
-                                        			let bType = "NUMBER"; // Number is base type 2
-                                        			if (tagJSON.DataType) {
-                                        				if (tagJSON.DataType == 7) {
-                                        					bType = "STRING";
-                                        				} else if (tagJSON.DataType == 2) { // Use NUMBER set as default
-                                        				}
-                                        			}
-                                        			result.AddRow({
-                                        				name: property,
-                                        				baseType: bType
-                                        			});
-                                        		}
+                                        	// see if there are any mapped properties in the Thing config before using the default behavior for querying tags
+                                        	let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                        
+                                        	let mappedTags = Things[mgr].GetMappedProperties({
+                                        		thingName: thingName
                                         	});
+                                        	if (mappedTags && mappedTags.rows && mappedTags.rows.length > 0) {
+                                        		const propertyDefinitions = Things[thingName].GetPropertyDefinitions();
+                                        		const existingPropertyNames = propertyDefinitions.rows.toArray()
+                                        			.map(property => property.name);
+                                        
+                                        		mappedTags.rows.toArray().forEach(mapRow => {
+                                        			if (mapRow.PropertyName && existingPropertyNames.indexOf(mapRow.PropertyName) !== -1) {
+                                        				let tagProps = Things[apiMgr].ExecuteRequest({
+                                        					Parameter2: undefined,
+                                        					Parameter1: mapRow.HistorianTag,
+                                        					Parameter4: undefined,
+                                        					Parameter3: undefined,
+                                        					Parameter6: undefined,
+                                        					RequestDisplayName: "Get tag properties",
+                                        					Parameter5: undefined,
+                                        					RequestBody: undefined
+                                        				});
+                                        				let bType = "NUMBER"; // Number is base type 2
+                                        				if (tagProps.DataType) {
+                                        					if (tagProps.DataType == 7) {
+                                        						bType = "STRING";
+                                        					} else if (tagProps.DataType == 2) { // Use NUMBER set as default
+                                        					}
+                                        				}
+                                        				result.AddRow({
+                                        					name: mapRow.PropertyName,
+                                        					baseType: bType
+                                        				});
+                                        			}
+                                        		});
+                                                
+                                        	} else {
+                                        
+                                        		let tagsJSON = Things[apiMgr].ExecuteRequest({
+                                        			Parameter2: 10000 /* STRING */ ,
+                                        			Parameter1: thingName + THING_DELIMITER + "*",
+                                        			Parameter4: undefined /* STRING */ ,
+                                        			Parameter3: undefined /* STRING */ ,
+                                        			Parameter6: undefined /* STRING */ ,
+                                        			RequestDisplayName: "Get tags with name mask",
+                                        			Parameter5: undefined /* STRING */ ,
+                                        			RequestBody: undefined
+                                        		});
+                                        
+                                        		tagsJSON.Tags.forEach(item => {
+                                        			const [myThingName, property] = item.split(THING_DELIMITER);
+                                        			if (thingName == myThingName && property.length > 0) {
+                                        				let tagName = thingName + THING_DELIMITER + property;
+                                        				let tagProps = Things[apiMgr].ExecuteRequest({
+                                        					Parameter2: undefined,
+                                        					Parameter1: tagName,
+                                        					Parameter4: undefined,
+                                        					Parameter3: undefined,
+                                        					Parameter6: undefined,
+                                        					RequestDisplayName: "Get tag properties",
+                                        					Parameter5: undefined,
+                                        					RequestBody: undefined
+                                        				});
+                                        				let bType = "NUMBER"; // Number is base type 2
+                                        				if (tagProps.DataType) {
+                                        					if (tagProps.DataType == 7) {
+                                        						bType = "STRING";
+                                        					} else if (tagProps.DataType == 2) { // Use NUMBER set as default
+                                        					}
+                                        				}
+                                        				result.AddRow({
+                                        					name: property,
+                                        					baseType: bType
+                                        				});
+                                        			}
+                                        		});
+                                        	}
                                         } catch (err) {
                                         	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
                                         	throw ("An error has occurred. Please check the script logs for more details.");
@@ -206,16 +266,17 @@
                                         <![CDATA[
                                         let result = 0;
                                         
-                                        const THING_DELIMITER = ">";
-                                        
                                         try {
                                         	// Use UCL property if it exists to get max property
                                         	if (hasProperty(thingName, propertyName + "_UCL")) {
                                         		result = Things[thingName][propertyName + "_UCL"];
                                         	} else {
-                                        		let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
-                                        		let tagName = thingName + THING_DELIMITER + propertyName;
-                                        		let tagsJSON = Things[manager].ExecuteRequest({
+                                                let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagName = Things[mgr].GetHistorianTagName({thingName: thingName,
+                                                                                               propertyName: propertyName});
+                                                
+                                                let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagsJSON = Things[apiMgr].ExecuteRequest({
                                         			Parameter2: undefined,
                                         			Parameter1: tagName,
                                         			Parameter4: undefined,
@@ -276,16 +337,17 @@
                                         <![CDATA[
                                         let result = 0;
                                         
-                                        const THING_DELIMITER = ">";
-                                        
                                         try {
                                             // Use LCL property if it exists to get max property
                                         	if (hasProperty(thingName, propertyName + "_LCL")) {
                                         		result = Things[thingName][propertyName + "_LCL"];
                                         	} else {
-                                        		let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
-                                        		let tagName = thingName + THING_DELIMITER + propertyName;
-                                        		let tagsJSON = Things[manager].ExecuteRequest({
+                                                let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagName = Things[mgr].GetHistorianTagName({thingName: thingName,
+                                                                                               propertyName: propertyName});
+                                                
+                                                let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        		let tagsJSON = Things[apiMgr].ExecuteRequest({
                                         			Parameter2: undefined,
                                         			Parameter1: tagName,
                                         			Parameter4: undefined,
@@ -468,10 +530,9 @@
                                         	infoTableName: "DynamicInfoTable"
                                         });
                                         
-                                        const THING_DELIMITER = ">";
-                                        
                                         try {
-                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        	let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                        	let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
                                         
                                         	// Add the timestamp
                                         	result.AddField({
@@ -479,17 +540,30 @@
                                         		baseType: "DATETIME"
                                         	});
                                         
-                                        	// Add the other fields
+                                        	// Build Historian tag list and reverse lookup
+                                        	let tagMap = {};
+                                        
                                         	let tagList = propertyNames.rows.toArray().map(row => {
+                                        		let propertyName = row.name;
+                                        
                                         		result.AddField({
-                                        			name: row.name,
+                                        			name: propertyName,
                                         			baseType: "NUMBER"
                                         		});
-                                        		return thingName + THING_DELIMITER + row.name;
+                                        
+                                        		let historianTag = Things[mgr].GetHistorianTagName({
+                                        			thingName: thingName,
+                                        			propertyName: propertyName
+                                        		});
+                                        
+                                        		tagMap[historianTag] = propertyName;
+                                        
+                                        		return historianTag;
                                         	}).join(";");
                                         
                                         	let minimum = Math.min(5000, maxItems).toString();
-                                        	let dataJSON = Things[manager].ExecuteRequest({
+                                        
+                                        	let dataJSON = Things[apiMgr].ExecuteRequest({
                                         		Parameter2: startDate.toISOString(),
                                         		Parameter1: tagList,
                                         		Parameter4: minimum,
@@ -501,18 +575,20 @@
                                         	});
                                         
                                         	dataJSON.Data.forEach(data => {
-                                        		let propertyName = data.TagName.split(THING_DELIMITER)[1].trim();
-                                        		const dataItem = data;
-                                        		dataItem.Samples.forEach(sample => {
+                                        		let propertyName = tagMap[data.TagName];
+                                        
+                                        		data.Samples.forEach(sample => {
                                         			let dt = parseDateISO(sample.TimeStamp);
+                                        
                                         			if (dt >= startDate && dt <= endDate) {
-                                        				var newRow = {};
-                                        				newRow.timestamp = parseDateISO(sample.TimeStamp);
+                                        				let newRow = {};
+                                        				newRow.timestamp = dt;
                                         				newRow[propertyName] = sample.Value;
                                         				result.AddRow(newRow);
                                         			}
                                         		});
                                         	});
+                                        
                                         } catch (err) {
                                         	logger.error("{} - {}:{} - {}", me.name, err.fileName, err.lineNumber, err);
                                         	throw ("An error has occurred. Please check the script logs for more details.");
@@ -550,13 +626,16 @@
                                         <![CDATA[
                                         let result = DataShapes["NumberValueStream"].CreateValues();
                                         
-                                        const THING_DELIMITER = ">";
-                                        
                                         try {
-                                        	let manager = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                            let mgr = Things["TWSC.ProficyHistorianChartsProvider.EntryPoint"].GetConfiguredComponentManager();
+                                            let apiMgr = Things["TWSC.ProficyHistorianAPI.EntryPoint"].GetConfiguredComponentManager();
+                                        
                                             let minimum = Math.min(5000, maxItems).toString();
-                                            let tagName = thingName + THING_DELIMITER + propertyName;
-                                        	let dataJSON = Things[manager].ExecuteRequest({
+                                            let tagName = Things[mgr].GetHistorianTagName({
+                                                    thingName: thingName,
+                                                    propertyName: propertyName
+                                                });
+                                        	let dataJSON = Things[apiMgr].ExecuteRequest({
                                         		Parameter2: startDate.toISOString(),
                                         		Parameter1: tagName,
                                                 Parameter4: minimum,
