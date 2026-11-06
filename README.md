@@ -273,12 +273,20 @@ Once configured, open the asset's **Asset Details > Charts** page in SCPA to vie
 
 ![Screenshot of the SCPA Asset Details Charts page displaying Proficy Historian data](docs/images/screenshot-scpa-assetdetails-charts.png)
 
+Optionally, create a tag map using `UpdatePropertyTagMapping` to associate an asset's ThingWorx property with a Proficy Historian tag. If no mapping exists for a property, the Charts Provider falls back to the `<EntityName>><PropertyName>` format.
+
+### UpdatePropertyTagMapping
+Creates or updates a mapping between a ThingWorx property and a Proficy Historian tag, and persists it in the asset Thing's `ProficyHistorianTagConfiguration` configuration table.
+
+Inputs:
+- Thing Name
+- ThingWorx Property Name
+- Proficy Historian Tag Name
+
 ## Limitations
 This implementation was developed as a proof of concept and assumes:
 
-- This Building Block assumed that Proficy Historian tag names will be in a scheme that fits with existing
-  assets in a demo data set. No complex manipulation or mapping table of tag names was done.
-- For the provided example services, the Historian tags must follow the `<EntityName>><PropertyName>` naming convention.
+- For the provided example services, the Historian tags must follow the `<EntityName>><PropertyName>` naming convention. The SCPA Charts Provider supports optional tag mappings through `UpdatePropertyTagMapping` and uses this naming convention when no mapping exists.
 - The initial authentication token fetch can take several seconds. 
     - If this were a production system, a scheduler might be created to refresh the token behind the scenes on a periodic basis.
 - No more than six parameters are needed for request specifications
