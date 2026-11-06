@@ -2,13 +2,10 @@
 
 Notable changes to the ThingWorx Proficy Historian API Building Block are documented in this file.
 
-# 2026-11-04
-- Added Tag Mapping capability to the SCPA provider.
-
-## 2026-10-27
-
-- Added the `TWSC.ProficyHistorianChartsProvider` wrapper Building Block to this repository for use with SCPA-enabled assets (requires SCPA 2.0.7 or above).
-- Documented the asset `providerThing` setup and access to Execute Request and API configuration in SCPA Admin.
+## [0.1.2] - 2026-11-06
+- SCPA Charts Provider: Added Tag Mapping capability.
+- SCPA Charts Provider: Added the `TWSC.ProficyHistorianChartsProvider` wrapper Building Block to this repository for use with SCPA-enabled assets (requires SCPA 2.0.7 or above).
+- SCPA Charts Provider: Documented the asset `providerThing` setup and access to Execute Request and API configuration in SCPA Admin.
 
 ## [0.1.1] - 2026-09-28
 
